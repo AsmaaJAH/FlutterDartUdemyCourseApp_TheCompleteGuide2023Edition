@@ -1,8 +1,11 @@
+import 'package:course_app/section2/dic_roller.dart';
 import 'package:flutter/material.dart';
 
 class GradientContainer extends StatelessWidget {
   const GradientContainer(this.colorsList, {super.key});
+
   final List<Color> colorsList;
+
   @override
   Widget build(context) {
     return Container(
@@ -14,14 +17,7 @@ class GradientContainer extends StatelessWidget {
         ),
       ),
       child: const Center(
-        child: Text(
-          'Asmaa Nagy',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 28,
-          ),
-        ),
+        child: DiceRoller(),
       ),
     );
   }
