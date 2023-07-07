@@ -1,10 +1,16 @@
-import 'package:course_app/section3/answer_button.dart';
 import 'package:course_app/section3/data/questions.dart';
-import 'package:course_app/section3/questions_summary.dart';
+import 'package:course_app/section3/questions_summary/questions_summary.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({super.key, required this.userchosenAnswer});
+  const ResultsScreen({
+    super.key,
+    required this.userchosenAnswer,
+    required this.onRestart,
+  });
+
+  final void Function() onRestart;
   final List<String> userchosenAnswer;
 
   List<Map<String, Object>> getSummaryData() {
@@ -23,9 +29,9 @@ class ResultsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final summaryData = getSummaryData();
-    final numTotQuestions=questions.length;
-    final numCorrectAns= summaryData.where((item){
-      return item['correct_answer']==item['user_answer'];
+    final numTotQuestions = questions.length;
+    final numCorrectAns = summaryData.where((item) {
+      return item['correct_answer'] == item['user_answer'];
     }).length;
     return SizedBox(
       width: double.infinity,
@@ -34,18 +40,48 @@ class ResultsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('You answered $numCorrectAns out of $numTotQuestions questions correctly!'),
+            Text(
+              'You Answered $numCorrectAns Out of $numTotQuestions Questions Correctly!',
+              style: GoogleFonts.ebGaramond(
+                color: const Color.fromARGB(255, 255, 255, 255),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(
               height: 30,
             ),
-            QuestionsSummary(summaryData: summaryData),
+            Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 3, 182, 170),
+                      Color.fromARGB(255, 94, 249, 228),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: QuestionsSummary(summaryData: summaryData)),
             const SizedBox(
               height: 30,
             ),
-            TextButton(
-              onPressed: () {},
-              child: AnswerButton(answer: "Restart Quiz!", onTap: () {}),
-            )
+            TextButton.icon(
+              onPressed: onRestart,
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.black,
+              ),
+              icon: const Icon(Icons.refresh),
+              label: const Text(
+                'Restart Quiz!',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+            ),
           ],
         ),
       ),
