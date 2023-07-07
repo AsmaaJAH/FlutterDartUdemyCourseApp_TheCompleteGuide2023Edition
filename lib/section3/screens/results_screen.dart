@@ -1,8 +1,23 @@
 import 'package:course_app/section3/answer_button.dart';
+import 'package:course_app/section3/data/questions.dart';
 import 'package:flutter/material.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({super.key});
+  const ResultsScreen({super.key, required this.userchosenAnswer});
+  final List<String> userchosenAnswer;
+
+  List<Map<String, Object>> getSummaryData() {
+    final List<Map<String, Object>> summary = [];
+    for (var i = 0; i < userchosenAnswer.length; i++) {
+      summary.add({
+        'question_index': i,
+        'question': questions[i].text,
+        'correct_answer': questions[i].answers[0],
+        'user_answer': userchosenAnswer[i]
+      });
+    }
+    return summary;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +38,7 @@ class ResultsScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {},
-              child: AnswerButton(answer: "Restart Quiz!", onTap: (){}),
+              child: AnswerButton(answer: "Restart Quiz!", onTap: () {}),
             )
           ],
         ),
