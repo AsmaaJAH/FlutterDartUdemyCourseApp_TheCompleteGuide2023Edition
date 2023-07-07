@@ -1,4 +1,4 @@
-import 'package:course_app/section2/gradient_container.dart';
+import 'package:course_app/section2_Dice_Roller_App/gradient_container.dart';
 import 'package:flutter/material.dart';
 
 void main() {

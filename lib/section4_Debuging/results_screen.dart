@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:course_app/section4/data/questions.dart';
-import 'package:course_app/section4/questions_summary/questions_summary.dart';
+import 'package:course_app/section4_Debuging/data/questions.dart';
+import 'package:course_app/section4_Debuging/questions_summary/questions_summary.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ResultsScreen extends StatelessWidget {

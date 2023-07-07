@@ -1,7 +1,7 @@
-import 'package:course_app/section3/questions_summary/questions_identifier.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:course_app/section4_Debuging/questions_summary/question_identifier.dart';
 
 class SummaryItem extends StatelessWidget {
   const SummaryItem(this.itemData, {super.key});
@@ -15,7 +15,7 @@ class SummaryItem extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: 10,
+        vertical: 8,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,9 +31,9 @@ class SummaryItem extends StatelessWidget {
               children: [
                 Text(
                   itemData['question'] as String,
-                  style: GoogleFonts.ebGaramond(
+                  style: GoogleFonts.lato(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -42,11 +42,11 @@ class SummaryItem extends StatelessWidget {
                 ),
                 Text(itemData['user_answer'] as String,
                     style: const TextStyle(
-                      color: Color.fromARGB(255, 44, 1, 113),
+                      color: Color.fromARGB(255, 202, 171, 252),
                     )),
                 Text(itemData['correct_answer'] as String,
                     style: const TextStyle(
-                      color: Color.fromARGB(255, 1, 96, 18),
+                      color: Color.fromARGB(255, 181, 254, 246),
                     )),
               ],
             ),

@@ -1,7 +1,7 @@
-import 'package:course_app/section3/data/questions.dart';
-import 'package:course_app/section3/screens/questions_screen.dart';
-import 'package:course_app/section3/screens/results_screen.dart';
-import 'package:course_app/section3/screens/start_screen.dart';
+import 'package:course_app/section3_quiz_app/data/questions.dart';
+import 'package:course_app/section3_quiz_app/screens/questions_screen.dart';
+import 'package:course_app/section3_quiz_app/screens/results_screen.dart';
+import 'package:course_app/section3_quiz_app/screens/start_screen.dart';
 import 'package:flutter/material.dart';
 
 class Quiz extends StatefulWidget {

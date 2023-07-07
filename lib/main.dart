@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:course_app/section4/quiz.dart';
+import 'package:course_app/section5_expense_tracker_app/expenses.dart';
 
 void main() {
-  runApp(const Quiz());
+  runApp(
+    const MaterialApp(
+      home: Expenses(),
+    ),
+  );
 }
