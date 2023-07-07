@@ -11,10 +11,7 @@ class QuestionsSummary extends StatelessWidget {
       height: 300,
       child: SingleChildScrollView(
         child: Column(
-          children: summaryData.map((item) {
-              return SummaryItem(item);
-            },
-          ).toList(),
+          children: [...summaryData.map((item)=> SummaryItem(item))],
         ),
       ),
     );
