@@ -5,7 +5,7 @@ class ExpenseCard extends StatelessWidget {
   const ExpenseCard({super.key, required this.expense});
   final Expense expense;
   @override
-  Widget build(Context) {
+  Widget build(context) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
