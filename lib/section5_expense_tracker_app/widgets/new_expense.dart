@@ -1,4 +1,6 @@
+import 'package:course_app/section5_expense_tracker_app/model/expense.dart';
 import 'package:flutter/material.dart';
+import 'package:course_app/section5_expense_tracker_app/model/expense.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
@@ -11,15 +13,31 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-  void _presentDatePicker() {
+  Category _selectedCategory = Category.leisure;
+
+  DateTime? _selectedDate;
+  void _presentDatePicker() async {
     final now = DateTime.now();
     final firstDate = DateTime(now.year - 1, now.month, now.day);
-    showDatePicker(
-        context: context,
-        initialDate: now,
-        firstDate: firstDate,
-        lastDate: now);
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: firstDate,
+      lastDate: now,
+    );
+    setState(() {
+      _selectedDate = pickedDate;
+    });
   }
+
+  void _checkValidationSubmittedData() {
+    final enteredAmount = double.tryParse(_amountController.text);
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+    if(_titleController.text.trim().isEmpty||amountIsInvalid||_selectedDate==null){
+      //error message 
+    }
+  }
+
 
   @override
   void dispose() {
@@ -61,7 +79,11 @@ class _NewExpenseState extends State<NewExpense> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text('selected date'),
+                    Text(
+                      _selectedDate == null
+                          ? 'No selected date'
+                          : formatter.format(_selectedDate!),
+                    ),
                     IconButton(
                       onPressed: _presentDatePicker,
                       icon: const Icon(
@@ -75,6 +97,26 @@ class _NewExpenseState extends State<NewExpense> {
           ),
           Row(
             children: [
+              DropdownButton(
+                  value: _selectedCategory, // apeared to user
+                  items: Category.values
+                      .map(
+                        (category) => DropdownMenuItem(
+                          value: category, //internal not appeared to user
+                          child: Text(
+                            category.name.toUpperCase(),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (categoryValue) {
+                    if (categoryValue == null) {
+                      return;
+                    }
+                    setState(() {
+                      _selectedCategory = categoryValue;
+                    });
+                  }),
               ElevatedButton(
                 onPressed: () {
                   // print(_titleController.text);
