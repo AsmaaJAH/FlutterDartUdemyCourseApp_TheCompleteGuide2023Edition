@@ -35,20 +35,50 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      isScrollControlled: false,
       context: context,
-      builder: (ctx) =>  NewExpense(onAddExpense: _addExpense),
+      builder: (ctx) => NewExpense(onAddExpense: _addExpense),
     );
   }
 
   void _addExpense(Expense expense) {
     setState(() {
-          _registeredExpenses.add(expense);
-
+      _registeredExpenses.add(expense);
     });
+  }
+
+  void _removeExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(milliseconds: 3000),
+        content: const Text('You have just deleted an Expense'),
+        action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              setState(() {
+                _registeredExpenses.insert(expenseIndex, expense);
+              });
+            }),
+      ),
+    );
   }
 
   @override
   Widget build(context) {
+    Widget mainContent = const Center(
+      child: Text("No Expenses Found. Start Entering your Expenses now! "),
+    );
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: _registeredExpenses,
+        onRemoveExpense: _removeExpense,
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text("Asmaa's Expense Tracker"),
@@ -63,7 +93,7 @@ class _ExpensesState extends State<Expenses> {
         children: [
           const Text('data'),
           Expanded(
-            child: ExpensesList(expenses: _registeredExpenses),
+            child: mainContent,
           ),
         ],
       ),

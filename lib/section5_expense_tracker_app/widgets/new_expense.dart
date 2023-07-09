@@ -31,7 +31,7 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
-  void _checkValidationSubmittedData() {
+  void _submitValidatedData() {
     final enteredAmount = double.tryParse(_amountController.text);
     final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
     if (_titleController.text.trim().isEmpty ||
@@ -55,7 +55,14 @@ class _NewExpenseState extends State<NewExpense> {
       );
       return;
     }
-    widget.onAddExpense(Expense(title: _titleController.text, amount: enteredAmount, date: _selectedDate!, category:_selectedCategory),);
+    widget.onAddExpense(
+      Expense(
+          title: _titleController.text,
+          amount: enteredAmount,
+          date: _selectedDate!,
+          category: _selectedCategory),
+    );
+    Navigator.pop(context);
   }
 
   @override
@@ -68,7 +75,7 @@ class _NewExpenseState extends State<NewExpense> {
   @override
   Widget build(context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.fromLTRB(20,50,20,20),
       child: Column(
         children: [
           TextField(
@@ -137,7 +144,7 @@ class _NewExpenseState extends State<NewExpense> {
                     });
                   }),
               ElevatedButton(
-                onPressed: _checkValidationSubmittedData,
+                onPressed: _submitValidatedData,
                 child: const Text('Save Expense'),
               ),
               const Spacer(),
