@@ -11,6 +11,15 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  void _presentDatePicker() {
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year - 1, now.month, now.day);
+    showDatePicker(
+        context: context,
+        initialDate: now,
+        firstDate: firstDate,
+        lastDate: now);
+  }
 
   @override
   void dispose() {
@@ -33,31 +42,50 @@ class _NewExpenseState extends State<NewExpense> {
               label: Text("Enter Title"),
             ),
           ),
-          TextField(
-            controller: _amountController,
-            maxLength: 75,
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              prefixText: '\$',
-              label: Text("Enter Amount"),
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _amountController,
+                  maxLength: 75,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    prefixText: '\$',
+                    label: Text("Enter Amount"),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text('selected date'),
+                    IconButton(
+                      onPressed: _presentDatePicker,
+                      icon: const Icon(
+                        Icons.calendar_month,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           Row(
             children: [
               ElevatedButton(
                 onPressed: () {
-                  print(_titleController.text);
-                  print(_amountController.text);
-
+                  // print(_titleController.text);
+                  // print(_amountController.text);
                 },
                 child: const Text('Save Expense'),
               ),
               const Spacer(),
-                ElevatedButton(
+              ElevatedButton(
                 onPressed: () {
-                  print(_titleController.text);
-                  print(_amountController.text);
-
+                  Navigator.pop(context);
                 },
                 child: const Text('Cancel '),
               ),
