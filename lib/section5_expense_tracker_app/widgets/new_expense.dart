@@ -1,9 +1,10 @@
 import 'package:course_app/section5_expense_tracker_app/model/expense.dart';
 import 'package:flutter/material.dart';
-import 'package:course_app/section5_expense_tracker_app/model/expense.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
+  const NewExpense({super.key, required this.onAddExpense});
+  final void Function(Expense expense) onAddExpense;
+
   @override
   State<NewExpense> createState() {
     return _NewExpenseState();
@@ -33,11 +34,29 @@ class _NewExpenseState extends State<NewExpense> {
   void _checkValidationSubmittedData() {
     final enteredAmount = double.tryParse(_amountController.text);
     final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
-    if(_titleController.text.trim().isEmpty||amountIsInvalid||_selectedDate==null){
-      //error message 
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedDate == null) {
+      //error message
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text("invalid input"),
+          content: const Text("CHECK YOUR INPUT AGAIN"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+              },
+              child: const Text("ok"),
+            ),
+          ],
+        ),
+      );
+      return;
     }
+    widget.onAddExpense(Expense(title: _titleController.text, amount: enteredAmount, date: _selectedDate!, category:_selectedCategory),);
   }
-
 
   @override
   void dispose() {
@@ -118,10 +137,7 @@ class _NewExpenseState extends State<NewExpense> {
                     });
                   }),
               ElevatedButton(
-                onPressed: () {
-                  // print(_titleController.text);
-                  // print(_amountController.text);
-                },
+                onPressed: _checkValidationSubmittedData,
                 child: const Text('Save Expense'),
               ),
               const Spacer(),
