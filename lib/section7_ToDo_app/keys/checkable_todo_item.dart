@@ -38,7 +38,7 @@ class _CheckableTodoItemState extends State<CheckableTodoItem> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Checkbox(value: _done, onChanged: _setDone, activeColor:Color.fromARGB(252, 4, 237, 132),),
+          Checkbox(value: _done, onChanged: _setDone, activeColor:const Color.fromARGB(252, 4, 237, 132),),
           const SizedBox(width: 6),
           Icon(icon),
           const SizedBox(width: 12),
