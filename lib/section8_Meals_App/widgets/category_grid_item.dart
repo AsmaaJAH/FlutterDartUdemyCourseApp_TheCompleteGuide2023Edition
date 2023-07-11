@@ -10,16 +10,19 @@ class CategoryGridItem extends StatelessWidget {
   @override
   Widget build(context) {
     return InkWell(
+  
       onTap: onSelectCategory,
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(20),
       child: Container(
+      
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
+          //color: Colors.white,
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
               colors: [
-                category.color.withOpacity(0.45),
+                category.color.withOpacity(0.35),
                 category.color.withOpacity(0.9),
               ],
               begin: Alignment.topLeft,

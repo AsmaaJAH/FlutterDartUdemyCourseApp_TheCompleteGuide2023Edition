@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
-  
+
   void _selectCategory(BuildContext context, Category category) {
     final filteredMeals =
         dummyMeals.where((meal) => meal.categories.contains(category.id)).toList();
@@ -25,7 +25,8 @@ class CategoryScreen extends StatelessWidget {
   Widget build(context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Choose Category"),
+        backgroundColor: const Color.fromARGB(255, 1, 57, 47),
+        title: const Text("Choose Category", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28),),
       ),
       body: GridView(
         padding: const EdgeInsets.all(20),
