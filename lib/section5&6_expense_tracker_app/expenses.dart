@@ -84,6 +84,7 @@ class _ExpensesState extends State<Expenses> {
     }
     return Scaffold(
       appBar: AppBar(
+        centerTitle: false,// on ios
         title: const Text("Asmaa's Expense Tracker"),
         actions: [
           IconButton(
