@@ -1,3 +1,4 @@
+import 'package:course_app/section5_expense_tracker_app/widgets/chart/chart.dart';
 import 'package:course_app/section5_expense_tracker_app/widgets/expenses_list/expenses_list.dart';
 import 'package:course_app/section5_expense_tracker_app/model/expense.dart';
 import 'package:course_app/section5_expense_tracker_app/widgets/new_expense.dart';
@@ -91,7 +92,7 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Column(
         children: [
-          const Text('data'),
+          Chart(expenses: _registeredExpenses,),
           Expanded(
             child: mainContent,
           ),
