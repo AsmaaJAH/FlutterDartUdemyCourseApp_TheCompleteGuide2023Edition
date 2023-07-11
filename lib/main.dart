@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:course_app/section5_expense_tracker_app/expenses.dart';
+import 'package:course_app/section5&6_expense_tracker_app/expenses.dart';
 
 var kColorScheme =
     ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 1, 253, 203));

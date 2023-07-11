@@ -1,7 +1,7 @@
-import 'package:course_app/section5_expense_tracker_app/widgets/chart/chart.dart';
-import 'package:course_app/section5_expense_tracker_app/widgets/expenses_list/expenses_list.dart';
-import 'package:course_app/section5_expense_tracker_app/model/expense.dart';
-import 'package:course_app/section5_expense_tracker_app/widgets/new_expense.dart';
+import 'package:course_app/section5&6_expense_tracker_app/widgets/chart/chart.dart';
+import 'package:course_app/section5&6_expense_tracker_app/widgets/expenses_list/expenses_list.dart';
+import 'package:course_app/section5&6_expense_tracker_app/model/expense.dart';
+import 'package:course_app/section5&6_expense_tracker_app/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 
 class Expenses extends StatefulWidget {
