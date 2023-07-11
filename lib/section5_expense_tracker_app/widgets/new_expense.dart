@@ -74,89 +74,95 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20,50,20,20),
-      child: Column(
-        children: [
-          TextField(
-            controller: _titleController,
-            maxLength: 75,
-            keyboardType: TextInputType.text,
-            decoration: const InputDecoration(
-              label: Text("Enter Title"),
-            ),
-          ),
-          Row(
+    final keybordSpace = MediaQuery.of(context).viewInsets.bottom;
+    return SizedBox(
+      height: double.infinity,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(20, 50, 20, keybordSpace+20),
+          child: Column(
             children: [
-              Expanded(
-                child: TextField(
-                  controller: _amountController,
-                  maxLength: 75,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    prefixText: '\$',
-                    label: Text("Enter Amount"),
-                  ),
+              TextField(
+                controller: _titleController,
+                maxLength: 75,
+                keyboardType: TextInputType.text,
+                decoration: const InputDecoration(
+                  label: Text("Enter Title"),
                 ),
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      _selectedDate == null
-                          ? 'No selected date'
-                          : formatter.format(_selectedDate!),
-                    ),
-                    IconButton(
-                      onPressed: _presentDatePicker,
-                      icon: const Icon(
-                        Icons.calendar_month,
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _amountController,
+                      maxLength: 75,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        prefixText: '\$',
+                        label: Text("Enter Amount"),
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              DropdownButton(
-                  value: _selectedCategory, // apeared to user
-                  items: Category.values
-                      .map(
-                        (category) => DropdownMenuItem(
-                          value: category, //internal not appeared to user
-                          child: Text(
-                            category.name.toUpperCase(),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          _selectedDate == null
+                              ? 'No selected date'
+                              : formatter.format(_selectedDate!),
+                        ),
+                        IconButton(
+                          onPressed: _presentDatePicker,
+                          icon: const Icon(
+                            Icons.calendar_month,
                           ),
                         ),
-                      )
-                      .toList(),
-                  onChanged: (categoryValue) {
-                    if (categoryValue == null) {
-                      return;
-                    }
-                    setState(() {
-                      _selectedCategory = categoryValue;
-                    });
-                  }),
-              ElevatedButton(
-                onPressed: _submitValidatedData,
-                child: const Text('Save Expense'),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              const Spacer(),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Cancel '),
+              Row(
+                children: [
+                  DropdownButton(
+                      value: _selectedCategory, // apeared to user
+                      items: Category.values
+                          .map(
+                            (category) => DropdownMenuItem(
+                              value: category, //internal not appeared to user
+                              child: Text(
+                                category.name.toUpperCase(),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (categoryValue) {
+                        if (categoryValue == null) {
+                          return;
+                        }
+                        setState(() {
+                          _selectedCategory = categoryValue;
+                        });
+                      }),
+                  ElevatedButton(
+                    onPressed: _submitValidatedData,
+                    child: const Text('Save Expense'),
+                  ),
+                  const Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel '),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
