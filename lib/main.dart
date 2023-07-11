@@ -15,7 +15,8 @@ class App extends StatelessWidget {
       theme: ThemeData(useMaterial3: true),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Flutter Internals'),
+          backgroundColor: Color.fromARGB(255, 5, 255, 117),
+          title: const Text("Asmaa's ToDo Chackable App", style: TextStyle(fontWeight: FontWeight.bold,),),
         ),
         body: const Keys(),
       ),
