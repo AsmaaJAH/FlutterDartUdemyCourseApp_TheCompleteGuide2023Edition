@@ -12,14 +12,21 @@ class FilterScreen extends StatefulWidget {
 
 class _FilterScreenState extends State<FilterScreen> {
   var _glutenFreeFilterSet = false;
+  var _lactoseFreeFilterSet = false;
+  var _vegetarianFilterSet = false;
+  var _veganFilterSet = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Filters")),
-      drawer: MainDrawer(onSelectScreen: (identifier){
-        if(identifier=='Meals'){
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> const TabScreen(),),);
+      drawer: MainDrawer(onSelectScreen: (identifier) {
+        if (identifier == 'Meals') {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (ctx) => const TabScreen(),
+            ),
+          );
         }
       }),
       body: Column(
@@ -39,6 +46,81 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
             subtitle: Text(
               'No Gluten in these meals',
+              style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            activeColor: Theme.of(context).colorScheme.tertiary,
+            contentPadding: const EdgeInsets.only(
+              right: 40,
+              left: 40,
+            ),
+          ),
+          SwitchListTile(
+            value: _lactoseFreeFilterSet,
+            onChanged: (isSwitched) {
+              setState(() {
+                _lactoseFreeFilterSet = isSwitched;
+              });
+            },
+            title: Text(
+              'Lactose-Free',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            subtitle: Text(
+              'No Lactose in these meals',
+              style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            activeColor: Theme.of(context).colorScheme.tertiary,
+            contentPadding: const EdgeInsets.only(
+              right: 40,
+              left: 40,
+            ),
+          ),
+          SwitchListTile(
+            value: _vegetarianFilterSet,
+            onChanged: (isSwitched) {
+              setState(() {
+                _vegetarianFilterSet = isSwitched;
+              });
+            },
+            title: Text(
+              'Vegetarian',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            subtitle: Text(
+              'vegetarian Recipe ingredients Only are in these meals',
+              style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            activeColor: Theme.of(context).colorScheme.tertiary,
+            contentPadding: const EdgeInsets.only(
+              right: 40,
+              left: 40,
+            ),
+          ),
+          SwitchListTile(
+            value: _veganFilterSet,
+            onChanged: (isSwitched) {
+              setState(() {
+                _veganFilterSet = isSwitched;
+              });
+            },
+            title: Text(
+              'Vegan',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            subtitle: Text(
+              'Vegan Recipe ingredients Only are in these meals',
               style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onBackground,
                   ),
