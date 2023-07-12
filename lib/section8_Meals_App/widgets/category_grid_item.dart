@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:course_app/section8_Meals_App/models/category.dart';
 
-// ignore: must_be_immutable
 class CategoryGridItem extends StatelessWidget {
-  CategoryGridItem({super.key, required this.category, required this.onSelectCategory});
+  const CategoryGridItem({super.key, required this.category, required this.onSelectCategory});
   final Category category;
-  void Function() onSelectCategory; //this is the address only ya asmaa even if the function actually takes parameters 
+  final void Function() onSelectCategory; //this is the address only ya asmaa even if the function actually takes parameters 
 
   @override
   Widget build(context) {

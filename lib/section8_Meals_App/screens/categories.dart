@@ -1,11 +1,13 @@
 import 'package:course_app/section8_Meals_App/data/dummy_data.dart';
 import 'package:course_app/section8_Meals_App/models/category.dart';
+import 'package:course_app/section8_Meals_App/models/meal.dart';
 import 'package:course_app/section8_Meals_App/screens/meals.dart';
 import 'package:course_app/section8_Meals_App/widgets/category_grid_item.dart';
 import 'package:flutter/material.dart';
 
 class CategoryScreen extends StatelessWidget {
-  const CategoryScreen({super.key});
+  const CategoryScreen({super.key, required this.onToggleFavourite});
+  final Function(Meal meal) onToggleFavourite;
 
   void _selectCategory(BuildContext context, Category category) {
     final filteredMeals =
@@ -16,6 +18,7 @@ class CategoryScreen extends StatelessWidget {
         builder: (ctx) => MealsScreen(
           title: category.title,
           meals: filteredMeals,
+          onToggleFavourite: onToggleFavourite,
         ),
       ),
     );
@@ -24,10 +27,7 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: const Color.fromARGB(255, 1, 57, 47),
-      //   title: const Text("Choose Category", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28),),
-      // ),
+
       body: GridView(
         padding: const EdgeInsets.all(20),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

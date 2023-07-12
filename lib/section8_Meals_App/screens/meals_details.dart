@@ -5,8 +5,10 @@ class MealsDetailsScreen extends StatelessWidget {
   const MealsDetailsScreen({
     super.key,
     required this.meal,
+    required this.onToggleFavourite,
   });
   final Meal meal;
+  final Function(Meal meal) onToggleFavourite;
   @override
   Widget build(context) {
     return Scaffold(
@@ -16,6 +18,14 @@ class MealsDetailsScreen extends StatelessWidget {
           meal.title,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              onToggleFavourite(meal);
+            },
+            icon: const Icon(Icons.star),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -52,7 +62,6 @@ class MealsDetailsScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
-                    
                     fontSize: 20,
                   ),
             ),
