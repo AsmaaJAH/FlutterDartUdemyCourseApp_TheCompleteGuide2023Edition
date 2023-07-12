@@ -1,5 +1,6 @@
 import 'package:course_app/section8_Meals_App/models/meal.dart';
 import 'package:course_app/section8_Meals_App/screens/categories.dart';
+import 'package:course_app/section8_Meals_App/screens/filters.dart';
 import 'package:course_app/section8_Meals_App/screens/meals.dart';
 import 'package:course_app/section8_Meals_App/widgets/drawer.dart';
 import 'package:flutter/material.dart';
@@ -47,10 +48,9 @@ class _TabScreenState extends State<TabScreen> {
     }
   }
   void _setScreen(String identifier){
+    Navigator.of(context).pop;
     if(identifier== 'Filters'){
-
-    }else{
-      Navigator.of(context).pop;
+      Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>const FilterScreen(),),);
     }
 
   }

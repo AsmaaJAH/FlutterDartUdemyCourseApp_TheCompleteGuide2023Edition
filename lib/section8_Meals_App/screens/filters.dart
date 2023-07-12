@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-class FiterScreen extends StatefulWidget {
-  const FiterScreen({super.key});
+class FilterScreen extends StatefulWidget {
+  const FilterScreen({super.key});
   @override
-  State<FiterScreen> createState() {
-    return _FiterScreenState();
+  State<FilterScreen> createState() {
+    return _FilterScreenState();
   }
 }
 
-class _FiterScreenState extends State<FiterScreen> {
+class _FilterScreenState extends State<FilterScreen> {
+  var _glutenFreeFilterSet = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,21 +18,28 @@ class _FiterScreenState extends State<FiterScreen> {
       body: Column(
         children: [
           SwitchListTile(
-            value: true,
-            onChanged: (here) {},
+            value: _glutenFreeFilterSet,
+            onChanged: (isSwitched) {
+              setState(() {
+                _glutenFreeFilterSet = isSwitched;
+              });
+            },
             title: Text(
               'Gluten-Free',
-              style:
-                Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
-              ),
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
             ),
             subtitle: Text(
               'No Gluten in these meals',
-              style:
-                Theme.of(context).textTheme.labelMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
-              ),
+              style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            activeColor: Theme.of(context).colorScheme.tertiary,
+            contentPadding: const EdgeInsets.only(
+              right: 40,
+              left: 40,
             ),
           ),
         ],
