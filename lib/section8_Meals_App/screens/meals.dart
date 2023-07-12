@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 class MealsScreen extends StatelessWidget {
   const MealsScreen({
     super.key,
-    required this.title,
+    this.title,
     required this.meals,
   });
 
-  final String title;
+  final String? title;
   final List<Meal> meals;
   void selectMeal(BuildContext context, Meal meal) {
     Navigator.of(context).push(
@@ -54,12 +54,14 @@ class MealsScreen extends StatelessWidget {
         ),
       );
     }
-
+    if (title == null) 
+      return content;
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 0, 101, 77),
         title: Text(
-          title,
+          title!,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
         ),
       ),

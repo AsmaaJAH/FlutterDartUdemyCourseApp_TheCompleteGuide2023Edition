@@ -24,10 +24,10 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 1, 57, 47),
-        title: const Text("Choose Category", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28),),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: const Color.fromARGB(255, 1, 57, 47),
+      //   title: const Text("Choose Category", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28),),
+      // ),
       body: GridView(
         padding: const EdgeInsets.all(20),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
