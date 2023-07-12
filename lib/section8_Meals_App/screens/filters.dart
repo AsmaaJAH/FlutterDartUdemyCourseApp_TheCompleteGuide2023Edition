@@ -1,5 +1,3 @@
-// import 'package:course_app/section8_Meals_App/screens/tabs.dart';
-// import 'package:course_app/section8_Meals_App/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 enum Filter {
@@ -10,7 +8,8 @@ enum Filter {
 }
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({super.key});
+  const FilterScreen({super.key, required this.currentFilters});
+  final Map<Filter, bool> currentFilters;
   @override
   State<FilterScreen> createState() {
     return _FilterScreenState();
@@ -24,18 +23,24 @@ class _FilterScreenState extends State<FilterScreen> {
   var _veganFilterSet = false;
 
   @override
+  void initState() {
+    _glutenFreeFilterSet = widget.currentFilters[Filter.glutenFree]!;
+    _lactoseFreeFilterSet = widget.currentFilters[Filter.lactoseFree]!;
+    _vegetarianFilterSet = widget.currentFilters[Filter.vegetarian]!;
+    _veganFilterSet = widget.currentFilters[Filter.vegan]!;
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Filters")),
-      // drawer: MainDrawer(onSelectScreen: (identifier) {
-      //   if (identifier == 'Meals') {
-      //     Navigator.of(context).pushReplacement(
-      //       MaterialPageRoute(
-      //         builder: (ctx) => const TabScreen(),
-      //       ),
-      //     );
-      //   }
-      // }),
+      appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
+          title: const Text(
+            "Filters",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+          )),
       body: WillPopScope(
         onWillPop: () async {
           Navigator.of(context).pop({
@@ -49,6 +54,8 @@ class _FilterScreenState extends State<FilterScreen> {
         child: Column(
           children: [
             SwitchListTile(
+              activeTrackColor: Theme.of(context).colorScheme.onBackground,
+              selectedTileColor: Theme.of(context).colorScheme.onBackground,
               value: _glutenFreeFilterSet,
               onChanged: (isSwitched) {
                 setState(() {
@@ -59,12 +66,15 @@ class _FilterScreenState extends State<FilterScreen> {
                 'Gluten-Free',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
                     ),
               ),
               subtitle: Text(
                 'No Gluten in these meals',
                 style: Theme.of(context).textTheme.labelMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 20,
                     ),
               ),
               activeColor: Theme.of(context).colorScheme.tertiary,
@@ -74,6 +84,9 @@ class _FilterScreenState extends State<FilterScreen> {
               ),
             ),
             SwitchListTile(
+              tileColor: Theme.of(context).colorScheme.primary,
+              activeTrackColor: Theme.of(context).colorScheme.onBackground,
+              selectedTileColor: Theme.of(context).colorScheme.onBackground,
               value: _lactoseFreeFilterSet,
               onChanged: (isSwitched) {
                 setState(() {
@@ -83,13 +96,16 @@ class _FilterScreenState extends State<FilterScreen> {
               title: Text(
                 'Lactose-Free',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Colors.black,
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
                     ),
               ),
               subtitle: Text(
                 'No Lactose in these meals',
                 style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Colors.black,
+                      fontSize: 20,
                     ),
               ),
               activeColor: Theme.of(context).colorScheme.tertiary,
@@ -99,6 +115,8 @@ class _FilterScreenState extends State<FilterScreen> {
               ),
             ),
             SwitchListTile(
+              activeTrackColor: Theme.of(context).colorScheme.onBackground,
+              selectedTileColor: Theme.of(context).colorScheme.onBackground,
               value: _vegetarianFilterSet,
               onChanged: (isSwitched) {
                 setState(() {
@@ -109,12 +127,15 @@ class _FilterScreenState extends State<FilterScreen> {
                 'Vegetarian',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
                     ),
               ),
               subtitle: Text(
                 'vegetarian Recipe ingredients Only are in these meals',
                 style: Theme.of(context).textTheme.labelMedium!.copyWith(
                       color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: 20,
                     ),
               ),
               activeColor: Theme.of(context).colorScheme.tertiary,
@@ -124,6 +145,9 @@ class _FilterScreenState extends State<FilterScreen> {
               ),
             ),
             SwitchListTile(
+              tileColor: Theme.of(context).colorScheme.primary,
+              activeTrackColor: Theme.of(context).colorScheme.onBackground,
+              selectedTileColor: Theme.of(context).colorScheme.onBackground,
               value: _veganFilterSet,
               onChanged: (isSwitched) {
                 setState(() {
@@ -133,13 +157,16 @@ class _FilterScreenState extends State<FilterScreen> {
               title: Text(
                 'Vegan',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Colors.black,
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
                     ),
               ),
               subtitle: Text(
                 'Vegan Recipe ingredients Only are in these meals',
                 style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Colors.black,
+                      fontSize: 20,
                     ),
               ),
               activeColor: Theme.of(context).colorScheme.tertiary,
