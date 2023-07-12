@@ -11,7 +11,30 @@ class FiterScreen extends StatefulWidget {
 class _FiterScreenState extends State<FiterScreen> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      appBar: AppBar(title: const Text("Filters")),
+      body: Column(
+        children: [
+          SwitchListTile(
+            value: true,
+            onChanged: (here) {},
+            title: Text(
+              'Gluten-Free',
+              style:
+                Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+              ),
+            ),
+            subtitle: Text(
+              'No Gluten in these meals',
+              style:
+                Theme.of(context).textTheme.labelMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
