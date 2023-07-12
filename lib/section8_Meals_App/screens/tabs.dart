@@ -48,7 +48,7 @@ class _TabScreenState extends State<TabScreen> {
     }
   }
   void _setScreen(String identifier){
-    Navigator.of(context).pop;
+    Navigator.of(context).pop();
     if(identifier== 'Filters'){
       Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>const FilterScreen(),),);
     }
@@ -80,6 +80,7 @@ class _TabScreenState extends State<TabScreen> {
       ),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
         currentIndex: _selectedPageIndex,
         onTap: _selectPage,
         items: const [
