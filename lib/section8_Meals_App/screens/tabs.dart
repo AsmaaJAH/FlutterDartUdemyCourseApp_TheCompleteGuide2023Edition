@@ -1,9 +1,17 @@
+import 'package:course_app/section8_Meals_App/data/dummy_data.dart';
 import 'package:course_app/section8_Meals_App/models/meal.dart';
 import 'package:course_app/section8_Meals_App/screens/categories.dart';
 import 'package:course_app/section8_Meals_App/screens/filters.dart';
 import 'package:course_app/section8_Meals_App/screens/meals.dart';
 import 'package:course_app/section8_Meals_App/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+
+const kInitialFilters = {
+  Filter.glutenFree: false,
+  Filter.lactoseFree: false,
+  Filter.vegetarian: false,
+  Filter.vegan: false,
+};
 
 class TabScreen extends StatefulWidget {
   const TabScreen({super.key});
@@ -16,6 +24,8 @@ class TabScreen extends StatefulWidget {
 class _TabScreenState extends State<TabScreen> {
   int _selectedPageIndex = 0;
   final List<Meal> _favouriteMeals = [];
+  // ignore: unused_field
+  Map<Filter, bool> _chosenFilters = kInitialFilters;
 
   void _selectPage(int index) {
     setState(() {
@@ -26,7 +36,19 @@ class _TabScreenState extends State<TabScreen> {
   void _showSnackBarMessage(String message) {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(duration: const Duration(milliseconds: 500,),backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,content: Text(message, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold,),),),
+      SnackBar(
+        duration: const Duration(
+          milliseconds: 500,
+        ),
+        backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
+        content: Text(
+          message,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
     );
   }
 
@@ -37,30 +59,54 @@ class _TabScreenState extends State<TabScreen> {
       setState(() {
         _favouriteMeals.remove(meal);
       });
-     _showSnackBarMessage('Meal Is No Longer A Favorite.');
-
+      _showSnackBarMessage('Meal Is No Longer A Favorite.');
     } else {
       setState(() {
         _favouriteMeals.add(meal);
       });
-     _showSnackBarMessage('Meal Is Added To Favorite.');
-
+      _showSnackBarMessage('Meal Is Added To Favorite.');
     }
   }
-  void _setScreen(String identifier){
+
+  void _setScreen(String identifier) async {
     Navigator.of(context).pop();
-    if(identifier== 'Filters'){
-      Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>const FilterScreen(),),);
+    if (identifier == 'Filters') {
+      final resultsFilters =
+          await Navigator.of(context).push<Map<Filter, bool>>(
+        MaterialPageRoute(
+          builder: (ctx) => const FilterScreen(),
+        ),
+      );
+      setState(() {
+        _chosenFilters = resultsFilters ?? kInitialFilters;
+      });
     }
-
   }
+
   @override
   Widget build(BuildContext context) {
+    var activePageTitle = 'Categories';
+    final availableMeals = dummyMeals.where((meal) {
+      if (_chosenFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
+        return false;
+      }
+      if (_chosenFilters[Filter.lactoseFree]! && !meal.isLactoseFree) {
+        return false;
+      }
+      if (_chosenFilters[Filter.vegetarian]! && !meal.isVegetarian) {
+        return false;
+      }
+      if (_chosenFilters[Filter.vegan]! && !meal.isVegan) {
+        return false;
+      }
+      return true;
+    }).toList();
+
     Widget activePage = CategoryScreen(
+      availableMeals: availableMeals,
       onToggleFavourite: _toggleMealFavouriteStatus,
     );
-    var activePageTitle = 'Categories';
-
+    
     if (_selectedPageIndex == 1) {
       activePageTitle = 'Favourites';
       activePage = MealsScreen(
@@ -69,9 +115,10 @@ class _TabScreenState extends State<TabScreen> {
       );
     }
     return Scaffold(
-      drawer: MainDrawer(onSelectScreen: _setScreen,),
+      drawer: MainDrawer(
+        onSelectScreen: _setScreen,
+      ),
       appBar: AppBar(
-        
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
         title: Text(
           activePageTitle,

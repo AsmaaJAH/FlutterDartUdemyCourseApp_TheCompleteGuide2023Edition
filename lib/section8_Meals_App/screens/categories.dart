@@ -6,12 +6,14 @@ import 'package:course_app/section8_Meals_App/widgets/category_grid_item.dart';
 import 'package:flutter/material.dart';
 
 class CategoryScreen extends StatelessWidget {
-  const CategoryScreen({super.key, required this.onToggleFavourite});
+  const CategoryScreen({super.key, required this.onToggleFavourite, required this.availableMeals});
   final Function(Meal meal) onToggleFavourite;
+  final List<Meal> availableMeals;
 
   void _selectCategory(BuildContext context, Category category) {
-    final filteredMeals =
-        dummyMeals.where((meal) => meal.categories.contains(category.id)).toList();
+    final filteredMeals = availableMeals
+        .where((meal) => meal.categories.contains(category.id))
+        .toList();
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -27,7 +29,6 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-
       body: GridView(
         padding: const EdgeInsets.all(20),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -41,7 +42,7 @@ class CategoryScreen extends StatelessWidget {
             CategoryGridItem(
               category: category,
               onSelectCategory: () {
-                _selectCategory(context,category );
+                _selectCategory(context, category);
               },
             ),
         ],
