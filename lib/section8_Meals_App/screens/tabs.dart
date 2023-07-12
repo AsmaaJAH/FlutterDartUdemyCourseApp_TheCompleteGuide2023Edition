@@ -22,16 +22,22 @@ class _TabScreenState extends State<TabScreen> {
   @override
   Widget build(BuildContext context) {
     Widget activePage = const CategoryScreen();
+    var activePageTitle = 'Categories';
 
     if (_selectedPageIndex == 1) {
+      activePageTitle = 'Favourites';
       activePage = const MealsScreen(
-        title: "Favourites",
+        
         meals: [],
       );
     }
     return Scaffold(
       appBar: AppBar(
-        title: const Text("data"),
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
+        title: Text(
+          activePageTitle,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+        ),
       ),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
@@ -41,6 +47,7 @@ class _TabScreenState extends State<TabScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.set_meal),
             label: 'Categories',
+            backgroundColor: Color.fromARGB(255, 1, 57, 47),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.star),

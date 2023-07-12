@@ -54,9 +54,9 @@ class MealsScreen extends StatelessWidget {
         ),
       );
     }
-    if (title == null) 
+    if (title == null) {
       return content;
-    
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 0, 101, 77),
