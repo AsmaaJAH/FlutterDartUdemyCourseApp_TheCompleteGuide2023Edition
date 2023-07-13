@@ -5,6 +5,8 @@ import 'package:course_app/section8_and9_Meals_App/screens/filters.dart';
 import 'package:course_app/section8_and9_Meals_App/screens/meals.dart';
 import 'package:course_app/section8_and9_Meals_App/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:course_app/section8_and9_Meals_App/provider/meals_provider.dart';
 
 const kInitialFilters = {
   Filter.glutenFree: false,
@@ -13,15 +15,15 @@ const kInitialFilters = {
   Filter.vegan: false,
 };
 
-class TabScreen extends StatefulWidget {
+class TabScreen extends ConsumerStatefulWidget {
   const TabScreen({super.key});
   @override
-  State<TabScreen> createState() {
+  ConsumerState<TabScreen> createState() {
     return _TabScreenState();
   }
 }
 
-class _TabScreenState extends State<TabScreen> {
+class _TabScreenState extends ConsumerState<TabScreen> {
   int _selectedPageIndex = 0;
   final List<Meal> _favouriteMeals = [];
   // ignore: unused_field
@@ -74,7 +76,9 @@ class _TabScreenState extends State<TabScreen> {
       final resultsFilters =
           await Navigator.of(context).push<Map<Filter, bool>>(
         MaterialPageRoute(
-          builder: (ctx) => FilterScreen(currentFilters: _chosenFilters,),
+          builder: (ctx) => FilterScreen(
+            currentFilters: _chosenFilters,
+          ),
         ),
       );
       setState(() {
@@ -86,7 +90,8 @@ class _TabScreenState extends State<TabScreen> {
   @override
   Widget build(BuildContext context) {
     var activePageTitle = 'Categories';
-    final availableMeals = dummyMeals.where((meal) {
+    final mealsData = ref.watch(mealsProvider);
+    final availableMeals = mealsData.where((meal) {
       if (_chosenFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
         return false;
       }
@@ -106,7 +111,7 @@ class _TabScreenState extends State<TabScreen> {
       availableMeals: availableMeals,
       onToggleFavourite: _toggleMealFavouriteStatus,
     );
-    
+
     if (_selectedPageIndex == 1) {
       activePageTitle = 'Favourites';
       activePage = MealsScreen(
