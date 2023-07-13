@@ -1,4 +1,3 @@
-import 'package:course_app/section8_and9_Meals_App/models/meal.dart';
 import 'package:course_app/section8_and9_Meals_App/provider/favourites_provider.dart';
 import 'package:course_app/section8_and9_Meals_App/screens/categories.dart';
 import 'package:course_app/section8_and9_Meals_App/screens/filters.dart';
@@ -6,7 +5,6 @@ import 'package:course_app/section8_and9_Meals_App/screens/meals.dart';
 import 'package:course_app/section8_and9_Meals_App/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:course_app/section8_and9_Meals_App/provider/meals_provider.dart';
 import 'package:course_app/section8_and9_Meals_App/provider/filters_provider.dart';
 
 const kInitialFilters = {
@@ -26,7 +24,6 @@ class TabScreen extends ConsumerStatefulWidget {
 
 class _TabScreenState extends ConsumerState<TabScreen> {
   int _selectedPageIndex = 0;
-  final List<Meal> _favouriteMeals = [];
 
   void _selectPage(int index) {
     setState(() {
@@ -58,7 +55,7 @@ class _TabScreenState extends ConsumerState<TabScreen> {
       final favouriteMeals = ref.watch(favouritesProvider);
       activePageTitle = 'Favourites';
       activePage = MealsScreen(
-        meals: _favouriteMeals,
+        meals: favouriteMeals,
       );
     }
     return Scaffold(

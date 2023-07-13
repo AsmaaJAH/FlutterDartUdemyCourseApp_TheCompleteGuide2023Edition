@@ -1,6 +1,5 @@
 import 'package:course_app/section8_and9_Meals_App/models/meal.dart';
 import 'package:course_app/section8_and9_Meals_App/provider/favourites_provider.dart';
-import 'package:course_app/section8_and9_Meals_App/provider/filters_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

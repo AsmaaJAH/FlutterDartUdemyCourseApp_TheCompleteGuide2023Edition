@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:course_app/section8_and9_Meals_App/provider/meals_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

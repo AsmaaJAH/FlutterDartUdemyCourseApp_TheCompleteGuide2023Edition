@@ -22,7 +22,7 @@ class _CategoryScreenState extends State<CategoryScreen>
     _animationController = AnimationController(
       vsync: this,
       lowerBound: 0,
-      upperBound: 10,
+      upperBound: 1,
       duration: const Duration(
         milliseconds: 500,
       ),
@@ -56,12 +56,6 @@ class _CategoryScreenState extends State<CategoryScreen>
     return Scaffold(
       body: AnimatedBuilder(
         animation: _animationController,
-        builder: (context, child) => Padding(
-                                      padding: EdgeInsets.only(
-                                        top: 100 - _animationController.value * 100,
-                                      ),
-                                      child: child,
-                                    ),
         child: GridView(
                       padding: const EdgeInsets.all(20),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -80,6 +74,12 @@ class _CategoryScreenState extends State<CategoryScreen>
                           ),
                       ],
                     ),
+              builder: (context, child) => Padding(
+                                      padding: EdgeInsets.only(
+                                        top: 100 - _animationController.value * 100,
+                                      ),
+                                      child: child,
+                                    ),
       ),
     );
   }
