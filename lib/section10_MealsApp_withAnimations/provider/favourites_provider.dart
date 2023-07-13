@@ -1,4 +1,4 @@
-import 'package:course_app/section8_and9_Meals_App/models/meal.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/models/meal.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 List<Meal> kInitialMealList = [];

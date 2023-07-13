@@ -1,7 +1,7 @@
-import 'package:course_app/section8_and9_Meals_App/models/meal.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/models/meal.dart';
 import 'package:flutter/material.dart';
 
-import 'package:course_app/section8_and9_Meals_App/models/category.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/models/category.dart';
 
 
 

@@ -1,4 +1,4 @@
-import 'package:course_app/section8_and9_Meals_App/screens/tabs.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/screens/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';

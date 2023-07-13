@@ -1,6 +1,6 @@
-import 'package:course_app/section8_and9_Meals_App/models/meal.dart';
-import 'package:course_app/section8_and9_Meals_App/screens/meals_details.dart';
-import 'package:course_app/section8_and9_Meals_App/widgets/meal_item.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/models/meal.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/screens/meals_details.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
 
 class MealsScreen extends StatelessWidget {

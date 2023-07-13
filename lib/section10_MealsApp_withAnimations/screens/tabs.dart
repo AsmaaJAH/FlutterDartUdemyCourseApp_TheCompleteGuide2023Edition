@@ -1,11 +1,11 @@
-import 'package:course_app/section8_and9_Meals_App/provider/favourites_provider.dart';
-import 'package:course_app/section8_and9_Meals_App/screens/categories.dart';
-import 'package:course_app/section8_and9_Meals_App/screens/filters.dart';
-import 'package:course_app/section8_and9_Meals_App/screens/meals.dart';
-import 'package:course_app/section8_and9_Meals_App/widgets/drawer.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/provider/favourites_provider.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/screens/categories.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/screens/filters.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/screens/meals.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:course_app/section8_and9_Meals_App/provider/filters_provider.dart';
+import 'package:course_app/section10_MealsApp_withAnimations/provider/filters_provider.dart';
 
 const kInitialFilters = {
   Filter.glutenFree: false,
