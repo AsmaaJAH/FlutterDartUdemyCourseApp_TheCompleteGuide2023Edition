@@ -1,4 +1,3 @@
-import 'package:course_app/section8_and9_Meals_App/data/dummy_data.dart';
 import 'package:course_app/section8_and9_Meals_App/models/meal.dart';
 import 'package:course_app/section8_and9_Meals_App/provider/favourites_provider.dart';
 import 'package:course_app/section8_and9_Meals_App/screens/categories.dart';
@@ -36,40 +35,8 @@ class _TabScreenState extends ConsumerState<TabScreen> {
     });
   }
 
-  void _showSnackBarMessage(String message) {
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        duration: const Duration(
-          milliseconds: 500,
-        ),
-        backgroundColor: Theme.of(context).snackBarTheme.backgroundColor,
-        content: Text(
-          message,
-          style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
 
-  void _toggleMealFavouriteStatus(Meal meal) {
-    final isExisting = _favouriteMeals.contains(meal);
 
-    if (isExisting) {
-      setState(() {
-        _favouriteMeals.remove(meal);
-      });
-      _showSnackBarMessage('Meal Is No Longer A Favorite.');
-    } else {
-      setState(() {
-        _favouriteMeals.add(meal);
-      });
-      _showSnackBarMessage('Meal Is Added To Favorite.');
-    }
-  }
 
   void _setScreen(String identifier) async {
     Navigator.of(context).pop();
@@ -110,7 +77,6 @@ class _TabScreenState extends ConsumerState<TabScreen> {
 
     Widget activePage = CategoryScreen(
       availableMeals: availableMeals,
-      onToggleFavourite: _toggleMealFavouriteStatus,
     );
 
     if (_selectedPageIndex == 1) {
@@ -118,7 +84,6 @@ class _TabScreenState extends ConsumerState<TabScreen> {
       activePageTitle = 'Favourites';
       activePage = MealsScreen(
         meals: _favouriteMeals,
-        onToggleFavourite: _toggleMealFavouriteStatus,
       );
     }
     return Scaffold(
