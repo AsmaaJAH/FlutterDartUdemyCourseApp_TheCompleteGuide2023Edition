@@ -1,5 +1,6 @@
 import 'package:course_app/section8_and9_Meals_App/models/meal.dart';
 import 'package:course_app/section8_and9_Meals_App/provider/favourites_provider.dart';
+import 'package:course_app/section8_and9_Meals_App/provider/filters_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,6 +12,9 @@ class MealsDetailsScreen extends ConsumerWidget {
   final Meal meal;
   @override
   Widget build(context, WidgetRef ref) {
+    final favouriteMeals = ref.watch(favouritesProvider);
+    final isFavourite = favouriteMeals.contains(meal);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 1, 57, 47),
@@ -21,7 +25,9 @@ class MealsDetailsScreen extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              final bool wasAdded= ref.read(favouritesProvider.notifier).toggleMealFavouriteStatus(meal);
+              final bool wasAdded = ref
+                  .read(favouritesProvider.notifier)
+                  .toggleMealFavouriteStatus(meal);
               ScaffoldMessenger.of(context).clearSnackBars();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -31,7 +37,9 @@ class MealsDetailsScreen extends ConsumerWidget {
                   backgroundColor:
                       Theme.of(context).snackBarTheme.backgroundColor,
                   content: Text(
-                    wasAdded? 'Meal was added to favorites' : 'Meal was removed from favourites',
+                    wasAdded
+                        ? 'Meal was added to favorites'
+                        : 'Meal was removed from favourites',
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -40,7 +48,7 @@ class MealsDetailsScreen extends ConsumerWidget {
                 ),
               );
             },
-            icon: const Icon(Icons.star),
+            icon: Icon( isFavourite? Icons.star: Icons.star_border),
           ),
         ],
       ),
