@@ -1,8 +1,8 @@
-import 'package:course_app/section8_Meals_App/data/dummy_data.dart';
-import 'package:course_app/section8_Meals_App/models/category.dart';
-import 'package:course_app/section8_Meals_App/models/meal.dart';
-import 'package:course_app/section8_Meals_App/screens/meals.dart';
-import 'package:course_app/section8_Meals_App/widgets/category_grid_item.dart';
+import 'package:course_app/section8_and9_Meals_App/data/dummy_data.dart';
+import 'package:course_app/section8_and9_Meals_App/models/category.dart';
+import 'package:course_app/section8_and9_Meals_App/models/meal.dart';
+import 'package:course_app/section8_and9_Meals_App/screens/meals.dart';
+import 'package:course_app/section8_and9_Meals_App/widgets/category_grid_item.dart';
 import 'package:flutter/material.dart';
 
 class CategoryScreen extends StatelessWidget {

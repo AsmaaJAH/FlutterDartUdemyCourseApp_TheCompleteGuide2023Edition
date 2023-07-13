@@ -1,7 +1,7 @@
-import 'package:course_app/section8_Meals_App/widgets/meal_item_trait.dart';
+import 'package:course_app/section8_and9_Meals_App/widgets/meal_item_trait.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:course_app/section8_Meals_App/models/meal.dart';
+import 'package:course_app/section8_and9_Meals_App/models/meal.dart';
 
 class MealItem extends StatelessWidget {
   const MealItem({
