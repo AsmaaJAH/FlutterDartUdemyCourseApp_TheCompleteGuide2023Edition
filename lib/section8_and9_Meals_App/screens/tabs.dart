@@ -1,5 +1,6 @@
 import 'package:course_app/section8_and9_Meals_App/data/dummy_data.dart';
 import 'package:course_app/section8_and9_Meals_App/models/meal.dart';
+import 'package:course_app/section8_and9_Meals_App/provider/favourites_provider.dart';
 import 'package:course_app/section8_and9_Meals_App/screens/categories.dart';
 import 'package:course_app/section8_and9_Meals_App/screens/filters.dart';
 import 'package:course_app/section8_and9_Meals_App/screens/meals.dart';
@@ -113,6 +114,7 @@ class _TabScreenState extends ConsumerState<TabScreen> {
     );
 
     if (_selectedPageIndex == 1) {
+      final favouriteMeals = ref.watch(favouritesProvider);
       activePageTitle = 'Favourites';
       activePage = MealsScreen(
         meals: _favouriteMeals,
