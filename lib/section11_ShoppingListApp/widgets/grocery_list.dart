@@ -1,4 +1,5 @@
 import 'package:course_app/section11_ShoppingListApp/data/dummy_items.dart';
+import 'package:course_app/section11_ShoppingListApp/widgets/new_term.dart';
 import 'package:flutter/material.dart';
 
 class GroceryList extends StatefulWidget {
@@ -10,11 +11,25 @@ class GroceryList extends StatefulWidget {
 }
 
 class _GroceryListState extends State<GroceryList> {
+  void _openAddItemScreen() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const NewItemScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Asmaa's Groceries List"),
+        actions: [
+          IconButton(
+            onPressed: _openAddItemScreen,
+            icon: const Icon(Icons.add),
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: groceryItems.length,
