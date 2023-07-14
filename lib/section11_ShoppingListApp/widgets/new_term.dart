@@ -27,50 +27,82 @@ class _NewItemScreenState extends State<NewItemScreen> {
                 label: Text("Item Name"),
               ),
               validator: (valueString) {
-                return"error message ";
+                return "error message ";
               },
             ),
-
-             Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        label: Text('Quantity'),
-                      ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text('Quantity'),
                     ),
                   ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: DropdownButtonFormField(
-                      
-                      items: [
-                        for (final category in categories.entries) //entries to transform any map to an itrable list ya asmaa
-                          DropdownMenuItem(
-                            value: category.value,
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  color: category.value.color,
-                                ),
-                                const SizedBox(width: 10),
-                                Text(category.value.title),
-                              ],
-                            ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: DropdownButtonFormField(
+                    items: [
+                      for (final category in categories
+                          .entries) //entries to transform any map to an itrable list ya asmaa
+                        DropdownMenuItem(
+                          value: category.value,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 20,
+                                height: 20,
+                                color: category.value.color,
+                              ),
+                              const SizedBox(width: 10),
+                              Text(category.value.title),
+                            ],
                           ),
-                      ],
-                      onChanged: (value) {},
-                    ),
+                        ),
+                    ],
+                    onChanged: (value) {},
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ButtonStyle(backgroundColor:
+                      MaterialStateProperty.resolveWith((states) {
+                    // If the button is pressed, return color, otherwise return another color
+                    if (states.contains(MaterialState.pressed)) {
+                      return Theme.of(context).colorScheme.onBackground;
+                    }
+                    return Theme.of(context).colorScheme.background;
+                  })),
+                  onPressed: () {},
+                  child: const Text('Reset'),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                ElevatedButton(
+                  style: ButtonStyle(backgroundColor:
+                      MaterialStateProperty.resolveWith((states) {
+                    if (states.contains(MaterialState.pressed)) {
+                      return Theme.of(context).colorScheme.onBackground;
+                    }
+                    return Theme.of(context).colorScheme.background;
+                  })),
+                  onPressed: () {},
+                  child: const Text('Save Item'),
+                ),
+              ],
+            ),
           ],
         )),
       ),
     );
-    
   }
 }
