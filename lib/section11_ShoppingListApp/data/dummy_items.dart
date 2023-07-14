@@ -11,7 +11,7 @@ import 'package:course_app/section11_ShoppingListApp/data/categories.dart';
   GroceryItem(
       id: 'b',
       name: 'Bananas',
-      quantity: 5,
+      quantity: 6,
       category: categories[Categories.fruit]!),
   GroceryItem(
       id: 'c',

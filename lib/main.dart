@@ -1,3 +1,4 @@
+import 'package:course_app/section11_ShoppingListApp/widgets/grocery_list.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,21 +8,20 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Groceries',
-      theme: ThemeData.dark().copyWith(
+      title: 'Asmaa\'s Flutter Groceries',
+      theme: ThemeData.light().copyWith(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 147, 229, 250),
-          brightness: Brightness.dark,
-          surface: const Color.fromARGB(255, 42, 51, 59),
+          seedColor: Color.fromARGB(255, 3, 244, 184),
+          brightness: Brightness.light,
+          surface: Color.fromARGB(255, 3, 255, 217),
         ),
-        scaffoldBackgroundColor: const Color.fromARGB(255, 50, 58, 60),
+        scaffoldBackgroundColor: Color.fromARGB(255, 172, 248, 227),
       ),
-      //home: ...,
+      home: const GroceryList(),
     );
   }
 }
