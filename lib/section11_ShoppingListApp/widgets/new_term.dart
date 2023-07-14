@@ -33,6 +33,6 @@ class _NewItemScreenState extends State<NewItemScreen> {
         )),
       ),
     );
-    ;
+    
   }
 }
