@@ -27,9 +27,24 @@ class _GroceryListState extends State<GroceryList> {
   }
 
   void _removeItem(GroceryItem item) {
+    final expenseIndex = _groceryList.indexOf(item);
     setState(() {
       _groceryList.remove(item);
     });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(milliseconds: 3000),
+        content: const Text('You have just deleted an Expense'),
+        action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              setState(() {
+                _groceryList.insert(expenseIndex, item);
+              });
+            }),
+      ),
+    );
   }
 
   @override
@@ -41,6 +56,10 @@ class _GroceryListState extends State<GroceryList> {
       content = ListView.builder(
         itemCount: _groceryList.length,
         itemBuilder: (context, index) => Dismissible(
+          background: Container(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Container(color: Theme.of(context).colorScheme.background),
+          ),
           key: ValueKey(_groceryList[index].id),
           onDismissed: (direction) {
             _removeItem(_groceryList[index]);
