@@ -20,6 +20,8 @@ class _NewItemScreenState extends State<NewItemScreen> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       print(_enteredItemName);
+      print(_enteredQuantity);
+      print(_selectedCatgory);
     }
   }
 
@@ -110,7 +112,9 @@ class _NewItemScreenState extends State<NewItemScreen> {
                             ),
                         ],
                         onChanged: (value) {
-                          _selectedCatgory = value!;
+                          setState(() {
+                           _selectedCatgory = value!;
+                          });
                         },
                       ),
                     ),
