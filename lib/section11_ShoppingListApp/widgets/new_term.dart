@@ -10,113 +10,130 @@ class NewItemScreen extends StatefulWidget {
 }
 
 class _NewItemScreenState extends State<NewItemScreen> {
+  final _formKey = GlobalKey<FormState>();
+  var _enteredItemName = '';
+
+  void _saveItemData() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      print(_enteredItemName);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add a new item'),
+        title: const Text('New Item To Your Grocery'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Form(
+            key: _formKey,
             child: Column(
-          children: [
-            TextFormField(
-              maxLength: 100,
-              decoration: const InputDecoration(
-                label: Text("Item Name"),
-              ),
-              validator: (value) {
-                if (value == null ||
-                    value.isEmpty ||
-                    value.trim().length <= 1 ||
-                    value.trim().length > 100) {
-                  return 'Must be between 1 and 100 characters.';
-                }
-                return null;
-              },
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Expanded(
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      label: Text('Quantity'),
-                    ),
-                    validator: (value) {
-                      if (value == null ||
-                          value.isEmpty ||
-                          int.tryParse(value) == null ||
-                          int.tryParse(value)! < 0) {
-                        return 'Kindly, Enter a valid positive number.';
-                      }
-                      return null;
-                    },
+                TextFormField(
+                  maxLength: 100,
+                  decoration: const InputDecoration(
+                    label: Text("Item Name",style: TextStyle(fontSize: 20,),),
                   ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: DropdownButtonFormField(
-                    items: [
-                      for (final category in categories
-                          .entries) //entries to transform any map to an itrable list ya asmaa
-                        DropdownMenuItem(
-                          value: category.value,
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 20,
-                                height: 20,
-                                color: category.value.color,
-                              ),
-                              const SizedBox(width: 10),
-                              Text(category.value.title),
-                            ],
-                          ),
-                        ),
-                    ],
-                    onChanged: (value) {},
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  style: ButtonStyle(backgroundColor:
-                      MaterialStateProperty.resolveWith((states) {
-                    // If the button is pressed, return color, otherwise return another color
-                    if (states.contains(MaterialState.pressed)) {
-                      return Theme.of(context).colorScheme.onBackground;
+                  validator: (value) {
+                    if (value == null ||
+                        value.isEmpty ||
+                        value.trim().length <= 1 ||
+                        value.trim().length > 100) {
+                      return 'Must be between 1 and 100 characters.';
                     }
-                    return Theme.of(context).colorScheme.background;
-                  })),
-                  onPressed: () {},
-                  child: const Text('Reset'),
+                    return null;
+                  },
+                  onSaved: (newValue) {
+                    _enteredItemName = newValue!;
+                  },
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          label: Text('Quantity', style: TextStyle(fontSize: 20,),),
+                        ),
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          if (value == null ||
+                              value.isEmpty ||
+                              int.tryParse(value) == null ||
+                              int.tryParse(value)! < 0) {
+                            return 'Kindly, Enter a valid positive number.';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: DropdownButtonFormField(
+                        items: [
+                          for (final category in categories
+                              .entries) //entries to transform any map to an itrable list ya asmaa
+                            DropdownMenuItem(
+                              value: category.value,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 20,
+                                    height: 20,
+                                    color: category.value.color,
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text(category.value.title),
+                                ],
+                              ),
+                            ),
+                        ],
+                        onChanged: (value) {},
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
-                  width: 10,
+                  height: 20,
                 ),
-                ElevatedButton(
-                  style: ButtonStyle(backgroundColor:
-                      MaterialStateProperty.resolveWith((states) {
-                    if (states.contains(MaterialState.pressed)) {
-                      return Theme.of(context).colorScheme.onBackground;
-                    }
-                    return Theme.of(context).colorScheme.background;
-                  })),
-                  onPressed: () {},
-                  child: const Text('Save Item'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ButtonStyle(backgroundColor:
+                          MaterialStateProperty.resolveWith((states) {
+                        // If the button is pressed, return color, otherwise return another color
+                        if (states.contains(MaterialState.pressed)) {
+                          return Theme.of(context).colorScheme.onBackground;
+                        }
+                        return Theme.of(context).colorScheme.background;
+                      })),
+                      onPressed: () {
+                        _formKey.currentState!.reset();
+                      },
+                      child: const Text('Reset'),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    ElevatedButton(
+                      style: ButtonStyle(backgroundColor:
+                          MaterialStateProperty.resolveWith((states) {
+                        if (states.contains(MaterialState.pressed)) {
+                          return Theme.of(context).colorScheme.onBackground;
+                        }
+                        return Theme.of(context).colorScheme.background;
+                      })),
+                      onPressed: _saveItemData,
+                      child: const Text('Save Item'),
+                    ),
+                  ],
                 ),
               ],
-            ),
-          ],
-        )),
+            )),
       ),
     );
   }
