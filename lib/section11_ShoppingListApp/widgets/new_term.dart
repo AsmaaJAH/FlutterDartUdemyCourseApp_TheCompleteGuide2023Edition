@@ -1,4 +1,5 @@
 import 'package:course_app/section11_ShoppingListApp/data/categories.dart';
+import 'package:course_app/section11_ShoppingListApp/models/category_model.dart';
 import 'package:flutter/material.dart';
 
 class NewItemScreen extends StatefulWidget {
@@ -12,6 +13,8 @@ class NewItemScreen extends StatefulWidget {
 class _NewItemScreenState extends State<NewItemScreen> {
   final _formKey = GlobalKey<FormState>();
   var _enteredItemName = '';
+  var _enteredQuantity = 1;
+  var _selectedCatgory = categories[Categories.vegetables]!;
 
   void _saveItemData() {
     if (_formKey.currentState!.validate()) {
@@ -35,7 +38,12 @@ class _NewItemScreenState extends State<NewItemScreen> {
                 TextFormField(
                   maxLength: 100,
                   decoration: const InputDecoration(
-                    label: Text("Item Name",style: TextStyle(fontSize: 20,),),
+                    label: Text(
+                      "Item Name",
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                   validator: (value) {
                     if (value == null ||
@@ -56,9 +64,15 @@ class _NewItemScreenState extends State<NewItemScreen> {
                     Expanded(
                       child: TextFormField(
                         decoration: const InputDecoration(
-                          label: Text('Quantity', style: TextStyle(fontSize: 20,),),
+                          label: Text(
+                            'Quantity',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
                         ),
                         keyboardType: TextInputType.number,
+                        initialValue: _enteredQuantity.toString(),
                         validator: (value) {
                           if (value == null ||
                               value.isEmpty ||
@@ -68,11 +82,15 @@ class _NewItemScreenState extends State<NewItemScreen> {
                           }
                           return null;
                         },
+                        onSaved: (value) {
+                          _enteredQuantity = int.parse(value!);
+                        },
                       ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: DropdownButtonFormField(
+                        value: _selectedCatgory,
                         items: [
                           for (final category in categories
                               .entries) //entries to transform any map to an itrable list ya asmaa
@@ -91,7 +109,9 @@ class _NewItemScreenState extends State<NewItemScreen> {
                               ),
                             ),
                         ],
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          _selectedCatgory = value!;
+                        },
                       ),
                     ),
                   ],
