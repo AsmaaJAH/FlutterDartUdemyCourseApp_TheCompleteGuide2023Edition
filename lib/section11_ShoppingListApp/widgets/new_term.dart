@@ -17,8 +17,22 @@ class _NewItemScreenState extends State<NewItemScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: Text('The form placeholder'),
+        child: Form(
+            child: Column(
+          children: [
+            TextFormField(
+              maxLength: 100,
+              decoration: const InputDecoration(
+                label: Text("Item Name"),
+              ),
+              validator: (valueString) {
+                return"error message ";
+              },
+            ),
+          ],
+        )),
       ),
-    );;
+    );
+    ;
   }
 }
