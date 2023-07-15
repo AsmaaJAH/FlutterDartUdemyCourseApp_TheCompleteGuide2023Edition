@@ -15,7 +15,7 @@ class GroceryList extends StatefulWidget {
 
 class _GroceryListState extends State<GroceryList> {
   List<GroceryItem> _groceryList = [];
-
+  var _isLoading = true;
   @override
   void initState() {
     _loadItemsFromFirestore();
@@ -44,29 +44,27 @@ class _GroceryListState extends State<GroceryList> {
           quantity: item.value['quantity'],
           category: category,
         ),
-        
       );
     }
     setState(() {
       _groceryList = loadedItems;
+      _isLoading = false;
     });
-    
   }
 
   void _openAddItemScreen() async {
-   final newItem= await Navigator.of(context).push<GroceryItem>(
+    final newItem = await Navigator.of(context).push<GroceryItem>(
       MaterialPageRoute(
         builder: (context) => const NewItemScreen(),
       ),
     );
-        if (newItem == null) {
+    if (newItem == null) {
       return;
     }
 
     setState(() {
       _groceryList.add(newItem);
     });
-    
   }
 
   void _removeItem(GroceryItem item) {
@@ -95,6 +93,11 @@ class _GroceryListState extends State<GroceryList> {
     Widget content = const Center(
       child: Text("Oh.. No Items To Show Here, Yet.. Try Adding Some!"),
     );
+    if (_isLoading) {
+      content = const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     if (_groceryList.isNotEmpty) {
       content = ListView.builder(
         itemCount: _groceryList.length,

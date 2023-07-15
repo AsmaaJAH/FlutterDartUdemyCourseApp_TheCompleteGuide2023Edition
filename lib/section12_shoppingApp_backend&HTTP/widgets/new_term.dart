@@ -19,10 +19,14 @@ class _NewItemScreenState extends State<NewItemScreen> {
   var _enteredItemName = '';
   var _enteredQuantity = 1;
   var _selectedCatgory = categories[Categories.vegetables]!;
+  var _isSending = false;
 
   void _saveItemData() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+      setState(() {
+        _isSending = true;
+      });
       final url = Uri.https(
           'courseapps-d3fab-default-rtdb.firebaseio.com', 'Grocery-List.json');
       final response = await http.post(
@@ -39,14 +43,19 @@ class _NewItemScreenState extends State<NewItemScreen> {
         ),
       );
 
-      final Map<String, dynamic> result= json.decode(response.body);
+      final Map<String, dynamic> result = json.decode(response.body);
 
       // ignore: use_build_context_synchronously
       if (!context.mounted) {
         return;
       }
 
-      Navigator.of(context).pop(GroceryItem(id: result['name'], name: _enteredItemName, quantity: _enteredQuantity, category: _selectedCatgory, ));
+      Navigator.of(context).pop(GroceryItem(
+        id: result['name'],
+        name: _enteredItemName,
+        quantity: _enteredQuantity,
+        category: _selectedCatgory,
+      ));
     }
   }
 
@@ -160,9 +169,11 @@ class _NewItemScreenState extends State<NewItemScreen> {
                         }
                         return Theme.of(context).colorScheme.background;
                       })),
-                      onPressed: () {
-                        _formKey.currentState!.reset();
-                      },
+                      onPressed: _isSending
+                          ? null
+                          : () {
+                              _formKey.currentState!.reset();
+                            },
                       child: const Text('Reset'),
                     ),
                     const SizedBox(
@@ -176,8 +187,14 @@ class _NewItemScreenState extends State<NewItemScreen> {
                         }
                         return Theme.of(context).colorScheme.background;
                       })),
-                      onPressed: _saveItemData,
-                      child: const Text('Save Item'),
+                      onPressed: _isSending ? null : _saveItemData,
+                      child: _isSending
+                          ? const SizedBox(
+                              height: 15,
+                              width: 15,
+                              child: CircularProgressIndicator(),
+                            )
+                          : const Text('Save Item'),
                     ),
                   ],
                 ),
