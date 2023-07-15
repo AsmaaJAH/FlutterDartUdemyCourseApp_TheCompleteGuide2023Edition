@@ -16,6 +16,7 @@ class GroceryList extends StatefulWidget {
 class _GroceryListState extends State<GroceryList> {
   List<GroceryItem> _groceryList = [];
   var _isLoading = true;
+  String? _error;
   @override
   void initState() {
     _loadItemsFromFirestore();
@@ -27,6 +28,12 @@ class _GroceryListState extends State<GroceryList> {
     final url = Uri.https(
         'courseapps-d3fab-default-rtdb.firebaseio.com', 'Grocery-List.json');
     final response = await http.get(url);
+    if (response.statusCode >= 400) {
+      setState(() {
+        _error = 'Faild To Fetch Data. Please Try Again Later.';
+      });
+    }
+
     final Map<String, dynamic> listData = json.decode(response.body);
     final List<GroceryItem> loadedItems = [];
 
@@ -122,6 +129,12 @@ class _GroceryListState extends State<GroceryList> {
             ),
           ),
         ),
+      );
+    }
+
+    if (_error != null) {
+      content = Center(
+        child: Text(_error!),
       );
     }
     return Scaffold(
