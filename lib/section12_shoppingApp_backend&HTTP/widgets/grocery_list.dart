@@ -74,25 +74,43 @@ class _GroceryListState extends State<GroceryList> {
     });
   }
 
-  void _removeItem(GroceryItem item) {
+  void _removeItem(GroceryItem item) async {
+    final deletionUrl = Uri.https(
+        'courseapps-d3fab-default-rtdb.firebaseio.com',
+        'Grocery-List/${item.id}.json');
     final expenseIndex = _groceryList.indexOf(item);
-    setState(() {
+
+     setState(() {
       _groceryList.remove(item);
     });
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        duration: const Duration(milliseconds: 3000),
-        content: const Text('You have just deleted an Expense'),
-        action: SnackBarAction(
-            label: 'Undo',
-            onPressed: () {
-              setState(() {
-                _groceryList.insert(expenseIndex, item);
-              });
-            }),
+      const SnackBar(
+        duration: Duration(milliseconds: 3000),
+        content: Text('You have just deleted an Expense'),
+        
       ),
     );
+    final deletionResonse = await http.delete(deletionUrl);
+    if (deletionResonse.statusCode >= 400) {
+      //undo deletion
+      setState(() {
+        _groceryList.insert(expenseIndex, item);
+      });
+
+      //show error happen during deletion
+      if (!context.mounted) { // ignore: use_build_context_synchronously
+        return;
+      }
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          duration: Duration(milliseconds: 3000),
+          content: Text('Something went wrong during deletion.Please try again later!'),
+        ),
+      );
+    }
+   
   }
 
   @override
