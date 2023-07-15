@@ -14,36 +14,43 @@ class GroceryList extends StatefulWidget {
 }
 
 class _GroceryListState extends State<GroceryList> {
-    List<GroceryItem> _groceryItems = [];
-  late Future<List<GroceryItem>> _loadedItems;
+  List<GroceryItem> _groceryList = [];
+  var _isLoading = true;
   String? _error;
-
   @override
   void initState() {
+    _loadItemsFromFirestore();
+
     super.initState();
-    _loadedItems = _loadItems();
   }
 
-  Future<List<GroceryItem>> _loadItems() async {
+  void _loadItemsFromFirestore() async {
     final url = Uri.https(
-        'flutter-prep-default-rtdb.firebaseio.com', 'shopping-list.json');
+        'courseapps-d3fab-default-rtdb.firebaseio.com', 'Grocery-List.json');
 
-    final response = await http.get(url);
-
+    try {final response = await http.get(url);
     if (response.statusCode >= 400) {
-      throw Exception('Failed to fetch grocery items. Please try again later.');
+      setState(() {
+        _error = 'Faild To Fetch Data. Please Try Again Later.';
+      });
     }
 
-    if (response.body == 'null') {
-      return [];
+    if (response.body == 'null') {// or  if (response.statusCode >= 400) in other databases , but here in firebase the string 'null' is enough ya asmaa 
+      setState(() {
+        _isLoading = false;
+      });
+      return;
     }
 
     final Map<String, dynamic> listData = json.decode(response.body);
     final List<GroceryItem> loadedItems = [];
+
     for (final item in listData.entries) {
       final category = categories.entries
           .firstWhere(
-              (catItem) => catItem.value.title == item.value['category'])
+            (categoryElement) =>
+                categoryElement.value.title == item.value['category'],
+          )
           .value;
       loadedItems.add(
         GroceryItem(
@@ -54,97 +61,126 @@ class _GroceryListState extends State<GroceryList> {
         ),
       );
     }
-    return loadedItems;
-  }
+    setState(() {
+      _groceryList = loadedItems;
+      _isLoading = false;
+    });
+    } catch (error) {
+      setState(() {
+        _error = 'Something went wrong! Please try again later.';
+      });
+    }
 
-  void _addItem() async {
+    }
+    
+
+  void _openAddItemScreen() async {
     final newItem = await Navigator.of(context).push<GroceryItem>(
       MaterialPageRoute(
-        builder: (ctx) => const NewItemScreen(),
+        builder: (context) => const NewItemScreen(),
       ),
     );
-
     if (newItem == null) {
       return;
     }
 
     setState(() {
-      _groceryItems.add(newItem);
+      _groceryList.add(newItem);
     });
   }
 
   void _removeItem(GroceryItem item) async {
-    final index = _groceryItems.indexOf(item);
+    final deletionUrl = Uri.https(
+        'courseapps-d3fab-default-rtdb.firebaseio.com',
+        'Grocery-List/${item.id}.json');
+    final expenseIndex = _groceryList.indexOf(item);
+
     setState(() {
-      _groceryItems.remove(item);
+      _groceryList.remove(item);
     });
-
-    final url = Uri.https('flutter-prep-default-rtdb.firebaseio.com',
-        'shopping-list/${item.id}.json');
-
-    final response = await http.delete(url);
-
-    if (response.statusCode >= 400) {
-      // Optional: Show error message
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        duration: Duration(milliseconds: 3000),
+        content: Text('You have just deleted an Grocery Item'),
+      ),
+    );
+    final deletionResonse = await http.delete(deletionUrl);
+    if (deletionResonse.statusCode >= 400) {
+      //undo deletion
       setState(() {
-        _groceryItems.insert(index, item);
+        _groceryList.insert(expenseIndex, item);
       });
+
+      //show error happen during deletion
+      // ignore: use_build_context_synchronously
+      if (!context.mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          duration: Duration(milliseconds: 3000),
+          content: Text(
+              'Something went wrong during deletion.Please try again later!'),
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget content = const Center(
+      child: Text("Oh.. No Items To Show Here, Yet.. Try Adding Some!"),
+    );
+    if (_isLoading) {
+      content = const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    if (_groceryList.isNotEmpty) {
+      content = ListView.builder(
+        itemCount: _groceryList.length,
+        itemBuilder: (context, index) => Dismissible(
+          background: Container(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Container(color: Theme.of(context).colorScheme.background),
+          ),
+          key: ValueKey(_groceryList[index].id),
+          onDismissed: (direction) {
+            _removeItem(_groceryList[index]);
+          },
+          child: ListTile(
+            title: Text(_groceryList[index].name),
+            leading: Container(
+              width: 24,
+              height: 24,
+              color: _groceryList[index].category.color,
+            ),
+            trailing: Text(
+              _groceryList[index].quantity.toString(),
+            ),
+          ),
+        ),
+      );
+    }
+
+    if (_error != null) {
+      content = Center(
+        child: Text(_error!),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Groceries'),
+        title: const Text("Asmaa's Groceries List"),
         actions: [
           IconButton(
-            onPressed: _addItem,
+            onPressed: _openAddItemScreen,
             icon: const Icon(Icons.add),
           ),
         ],
       ),
-      body: FutureBuilder(
-        future: _loadedItems,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                snapshot.error.toString(),
-              ),
-            );
-          }
-
-          if (snapshot.data!.isEmpty) {
-            return const Center(child: Text('No items added yet.'));
-          }
-
-          return ListView.builder(
-            itemCount: snapshot.data!.length,
-            itemBuilder: (ctx, index) => Dismissible(
-              onDismissed: (direction) {
-                _removeItem(snapshot.data![index]);
-              },
-              key: ValueKey(snapshot.data![index].id),
-              child: ListTile(
-                title: Text(snapshot.data![index].name),
-                leading: Container(
-                  width: 24,
-                  height: 24,
-                  color: snapshot.data![index].category.color,
-                ),
-                trailing: Text(
-                  snapshot.data![index].quantity.toString(),
-                ),
-              ),
-            ),
-          );
-        },
-      ),
+      body: content,
     );
   }
 }
