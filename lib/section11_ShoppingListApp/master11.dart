@@ -1,4 +1,4 @@
-import 'package:course_app/section12_shoppingApp_backend&HTTP/widgets/grocery_list.dart';
+import 'package:course_app/section11_ShoppingListApp/widgets/grocery_list.dart';
 import 'package:flutter/material.dart';
 
 void main() {

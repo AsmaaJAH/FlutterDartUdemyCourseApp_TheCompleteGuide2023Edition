@@ -1,6 +1,9 @@
+import 'package:course_app/section12_shoppingApp_backend&HTTP/data/categories.dart';
 import 'package:course_app/section12_shoppingApp_backend&HTTP/models/grocery_item.dart';
 import 'package:course_app/section12_shoppingApp_backend&HTTP/widgets/new_term.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class GroceryList extends StatefulWidget {
   const GroceryList({super.key});
@@ -11,19 +14,52 @@ class GroceryList extends StatefulWidget {
 }
 
 class _GroceryListState extends State<GroceryList> {
-  final List<GroceryItem> _groceryList = [];
+  List<GroceryItem> _groceryList = [];
+
+  @override
+  void initState() {
+    _loadItemsFromFirestore();
+
+    super.initState();
+  }
+
+  void _loadItemsFromFirestore() async {
+    final url = Uri.https(
+        'courseapps-d3fab-default-rtdb.firebaseio.com', 'Grocery-List.json');
+    final response = await http.get(url);
+    final Map<String, dynamic> listData = json.decode(response.body);
+    final List<GroceryItem> _loadedItems = [];
+
+    for (final item in listData.entries) {
+      final category = categories.entries
+          .firstWhere(
+            (categoryElement) =>
+                categoryElement.value.title == item.value['category'],
+          )
+          .value;
+      _loadedItems.add(
+        GroceryItem(
+          id: item.key,
+          name: item.value['name'],
+          quantity: item.value['quantity'],
+          category: category,
+        ),
+        
+      );
+    }
+    setState(() {
+      _groceryList = _loadedItems;
+    });
+    
+  }
+
   void _openAddItemScreen() async {
-    final newUserItem = await Navigator.of(context).push(
+    await Navigator.of(context).push<GroceryItem>(
       MaterialPageRoute(
         builder: (context) => const NewItemScreen(),
       ),
     );
-    if (newUserItem == null) {
-      return;
-    }
-    setState(() {
-      _groceryList.add(newUserItem);
-    });
+    _loadItemsFromFirestore();
   }
 
   void _removeItem(GroceryItem item) {
