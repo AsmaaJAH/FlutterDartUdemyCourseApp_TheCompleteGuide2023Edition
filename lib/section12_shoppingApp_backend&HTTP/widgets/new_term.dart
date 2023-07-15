@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:course_app/section12_shoppingApp_backend&HTTP/models/grocery_item.dart';
 import 'package:course_app/section12_shoppingApp_backend&HTTP/data/categories.dart';
 import 'package:course_app/section12_shoppingApp_backend&HTTP/models/category_model.dart';
 import 'package:flutter/material.dart';
@@ -38,11 +39,14 @@ class _NewItemScreenState extends State<NewItemScreen> {
         ),
       );
 
+      final Map<String, dynamic> result= json.decode(response.body);
+
       // ignore: use_build_context_synchronously
       if (!context.mounted) {
         return;
       }
-      Navigator.of(context).pop();
+
+      Navigator.of(context).pop(GroceryItem(id: result['name'], name: _enteredItemName, quantity: _enteredQuantity, category: _selectedCatgory, ));
     }
   }
 

@@ -28,7 +28,7 @@ class _GroceryListState extends State<GroceryList> {
         'courseapps-d3fab-default-rtdb.firebaseio.com', 'Grocery-List.json');
     final response = await http.get(url);
     final Map<String, dynamic> listData = json.decode(response.body);
-    final List<GroceryItem> _loadedItems = [];
+    final List<GroceryItem> loadedItems = [];
 
     for (final item in listData.entries) {
       final category = categories.entries
@@ -37,7 +37,7 @@ class _GroceryListState extends State<GroceryList> {
                 categoryElement.value.title == item.value['category'],
           )
           .value;
-      _loadedItems.add(
+      loadedItems.add(
         GroceryItem(
           id: item.key,
           name: item.value['name'],
@@ -48,18 +48,25 @@ class _GroceryListState extends State<GroceryList> {
       );
     }
     setState(() {
-      _groceryList = _loadedItems;
+      _groceryList = loadedItems;
     });
     
   }
 
   void _openAddItemScreen() async {
-    await Navigator.of(context).push<GroceryItem>(
+   final newItem= await Navigator.of(context).push<GroceryItem>(
       MaterialPageRoute(
         builder: (context) => const NewItemScreen(),
       ),
     );
-    _loadItemsFromFirestore();
+        if (newItem == null) {
+      return;
+    }
+
+    setState(() {
+      _groceryList.add(newItem);
+    });
+    
   }
 
   void _removeItem(GroceryItem item) {
