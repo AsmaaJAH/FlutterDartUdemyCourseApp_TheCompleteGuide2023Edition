@@ -1,11 +1,12 @@
+import 'package:course_app/section13_FavouritePlaces_App/screens/places.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
 final colorScheme = ColorScheme.fromSeed(
   brightness: Brightness.dark,
-  seedColor: const Color.fromARGB(255, 102, 6, 247),
-  background: const Color.fromARGB(255, 56, 49, 66),
+  seedColor: Color.fromARGB(255, 6, 247, 219),
+  background: Color.fromARGB(255, 11, 132, 113),
 );
 
 final theme = ThemeData().copyWith(
@@ -37,9 +38,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Great Places',
+      title: 'Asmaa\'s Places',
       theme: theme,
-      // //home: ...,
+      home:const PlacesScreen(),
     );
   }
 }
