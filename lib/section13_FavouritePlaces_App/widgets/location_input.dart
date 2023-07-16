@@ -5,7 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:course_app/section13_FavouritePlaces_App/models/place.dart';
 
 class LocationInput extends StatefulWidget {
-  const LocationInput({super.key});
+  const LocationInput({super.key, required this.onSelectLocation});
+  final void Function(PlaceLocation location) onSelectLocation;
 
   @override
   State<LocationInput> createState() {
@@ -16,6 +17,16 @@ class LocationInput extends StatefulWidget {
 class _LocationInputState extends State<LocationInput> {
   PlaceLocation? _pickedLocation;
   bool _isGettingLocation = false;
+
+  String get locationImage {
+    if (_pickedLocation == null) {
+      return '';
+    }
+    final lat = _pickedLocation!.latitude;
+    final lng = _pickedLocation!.longitude;
+    //return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng=&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$lat,$lng&key=real-key';
+    return 'https://cdn.sanity.io/images/f4joeudg/production/7f846197ab0edd09d1793a203d4b9016a2c22fa4-400x250.png';
+  }
 
   void _getCurrentLocation() async {
     Location location = Location();
@@ -49,11 +60,14 @@ class _LocationInputState extends State<LocationInput> {
     if (latitude == null || longitude == null) {
       return;
     }
-    final url = Uri.parse(
-        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyDLcwxUggpPZo8lxbH0TB4Crq5SJjtj4ag');
-    final response = await http.get(url);
-    final googleMapJsonData = json.decode(response.body);
-    final address = googleMapJsonData['results'][0]['formatted_address'];
+    //using google maps package to get the human readable address via inputing the above latitude and longitude in it
+    // final url = Uri.parse(
+    //     'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyDLcwxUggpPZo8lxbH0TB4Crq5SJjtj4ag');
+    // final response = await http.get(url);
+    // final googleMapJsonData = json.decode(response.body);
+    //final address = googleMapJsonData['results'][0]['formatted_address'];
+    var address = "277 Bedford Avenue, Brooklyn, NY 11211, USA";
+
     setState(() {
       _pickedLocation = PlaceLocation(
         latitude: latitude,
@@ -62,7 +76,8 @@ class _LocationInputState extends State<LocationInput> {
       );
       _isGettingLocation = false;
     });
-    debugPrint(address);
+    //debugPrint(address);
+    widget.onSelectLocation(_pickedLocation!);
   }
 
   @override
@@ -76,6 +91,15 @@ class _LocationInputState extends State<LocationInput> {
             fontWeight: FontWeight.bold,
           ),
     );
+
+    if (_pickedLocation != null) {
+      content = Image.network(
+        locationImage,
+        fit: BoxFit.cover,
+        width: double.infinity,
+        height: double.infinity,
+      );
+    }
 
     if (_isGettingLocation) {
       content = const CircularProgressIndicator();

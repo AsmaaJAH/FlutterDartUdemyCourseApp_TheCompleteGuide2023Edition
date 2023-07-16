@@ -20,7 +20,7 @@ class _AddPlacesScreenState extends ConsumerState<AddPlacesScreen> {
   PlaceLocation? _location;
   void _savePlace() {
     final enteredTitle = _titleController.text;
-    if (enteredTitle.isEmpty || _userCameraImage == null|| _location==null) {
+    if (enteredTitle.isEmpty || _userCameraImage == null || _location == null) {
       return;
     }
     ref.read(userPlacesNotifierProvider.notifier).addPlace(
@@ -76,7 +76,11 @@ class _AddPlacesScreenState extends ConsumerState<AddPlacesScreen> {
                 },
               ),
               const SizedBox(height: 20),
-              const LocationInput(),
+              LocationInput(
+                onSelectLocation: (userLocation) {
+                  _location = userLocation;
+                },
+              ),
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: _savePlace,
