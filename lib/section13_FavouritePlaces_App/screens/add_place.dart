@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:course_app/section13_FavouritePlaces_App/widgets/location_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:course_app/section13_FavouritePlaces_App/providers/user_places.dart';
@@ -52,6 +53,7 @@ class _AddPlacesScreenState extends ConsumerState<AddPlacesScreen> {
                   labelStyle: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
+                    
                   ),
                 ),
                 controller: _titleController,
@@ -61,13 +63,15 @@ class _AddPlacesScreenState extends ConsumerState<AddPlacesScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               //native camera image input
               ImageInput(
                 onPickedImage: (image) {
                   _userCameraImage = image;
                 },
               ),
+              const SizedBox(height: 20),
+              const LocationInput(),
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: _savePlace,

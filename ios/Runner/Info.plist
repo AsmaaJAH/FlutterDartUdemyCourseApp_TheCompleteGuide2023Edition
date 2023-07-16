@@ -2,12 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Get Your Favourite Place Location Setted.</string>
+
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Pick Your Image of Your Favourite Place.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Take Photo of Your Favourite Place.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Take Video of Your Favourite Place.</string>
+
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
