@@ -1,6 +1,6 @@
 import 'package:course_app/section12_shoppingApp_backend&HTTP/data/categories.dart';
 import 'package:course_app/section12_shoppingApp_backend&HTTP/models/grocery_item.dart';
-import 'package:course_app/section12_shoppingApp_backend&HTTP/widgets/new_term.dart';
+import 'package:course_app/section12_shoppingApp_backend&HTTP/widgets/new_item.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
