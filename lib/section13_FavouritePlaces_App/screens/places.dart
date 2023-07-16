@@ -1,3 +1,4 @@
+import 'package:course_app/section13_FavouritePlaces_App/screens/add_place.dart';
 import 'package:course_app/section13_FavouritePlaces_App/widgets/places_list.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,13 @@ class _PlacesScreenState extends State<PlacesScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => const AddPlacesScreen(),
+                ),
+              );
+            },
             icon: const Icon(Icons.add),
           ),
         ],
