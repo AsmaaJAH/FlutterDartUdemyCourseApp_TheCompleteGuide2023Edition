@@ -1,7 +1,8 @@
-import 'package:course_app/section13_FavouritePlaces_App/widgets/image_input.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:course_app/section13_FavouritePlaces_App/providers/user_places.dart';
+import 'package:course_app/section13_FavouritePlaces_App/widgets/image_input.dart';
 
 class AddPlacesScreen extends ConsumerStatefulWidget {
   const AddPlacesScreen({super.key});
@@ -13,12 +14,13 @@ class AddPlacesScreen extends ConsumerStatefulWidget {
 
 class _AddPlacesScreenState extends ConsumerState<AddPlacesScreen> {
   final _titleController = TextEditingController();
+  File? _userCameraImage;
   void _savePlace() {
     final enteredTitle = _titleController.text;
-    if (enteredTitle.isEmpty) {
+    if (enteredTitle.isEmpty || _userCameraImage==null ) {
       return;
     }
-    ref.read(userPlacesNotifierProvider.notifier).addPlace(enteredTitle);
+    ref.read(userPlacesNotifierProvider.notifier).addPlace(enteredTitle,_userCameraImage);
     Navigator.of(context).pop();
   }
 
@@ -61,7 +63,11 @@ class _AddPlacesScreenState extends ConsumerState<AddPlacesScreen> {
               ),
               const SizedBox(height: 10),
               //native camera image input
-              const ImageInput(),
+              ImageInput(
+                onPickedImage: (image) {
+                  _userCameraImage = image;
+                },
+              ),
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: _savePlace,

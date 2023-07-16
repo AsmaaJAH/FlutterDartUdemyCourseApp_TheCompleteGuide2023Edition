@@ -1,10 +1,11 @@
+import 'dart:io';
 import 'package:course_app/section13_FavouritePlaces_App/models/place.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserPlacesNotifier extends StateNotifier<List<PlaceBluePrint>> {
   UserPlacesNotifier() : super(const []);
-  void addPlace(String title) {
-    final newPlace = PlaceBluePrint(title: title);
+  void addPlace(String title, File image) {
+    final newPlace = PlaceBluePrint(title: title,image: image);
     state = [newPlace, ...state];
   }
 }
