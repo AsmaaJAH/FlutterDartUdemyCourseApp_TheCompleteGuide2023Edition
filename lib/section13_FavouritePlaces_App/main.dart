@@ -6,8 +6,8 @@ import 'package:course_app/section13_FavouritePlaces_App/screens/places.dart';
 
 final colorScheme = ColorScheme.fromSeed(
   brightness: Brightness.dark,
-  seedColor: Color.fromARGB(255, 6, 247, 219),
-  background: Color.fromARGB(255, 11, 132, 113),
+  seedColor: const  Color.fromARGB(255, 6, 247, 219),
+  background: const Color.fromARGB(255, 11, 132, 113),
 );
 
 final theme = ThemeData().copyWith(
