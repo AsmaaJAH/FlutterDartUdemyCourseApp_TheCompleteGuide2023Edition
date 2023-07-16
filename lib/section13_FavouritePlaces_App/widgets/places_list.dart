@@ -26,7 +26,12 @@ class PlacesList extends StatelessWidget {
     return ListView.builder(
       itemCount: placesList.length,
       itemBuilder: (ctx, index) => ListTile(
-       leading: CircleAvatar(radius: 30, backgroundImage: FileImage(placesList[index].image,),),
+        leading: CircleAvatar(
+          radius: 30,
+          backgroundImage: FileImage(
+            placesList[index].image,
+          ),
+        ),
         title: Text(
           placesList[index].title,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -35,13 +40,21 @@ class PlacesList extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
         ),
-      onTap: () {
-         Navigator.of(context).push(
+        subtitle: Text(
+          placesList[index].location.address,
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+                fontSize: 18,
+              ),
+        ),
+        onTap: () {
+          Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (ctx) => SinglePlaceDetailScreen(place: placesList[index]),
+              builder: (ctx) =>
+                  SinglePlaceDetailScreen(place: placesList[index]),
             ),
           );
-      },
+        },
       ),
     );
   }

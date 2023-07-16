@@ -66,7 +66,7 @@ class _LocationInputState extends State<LocationInput> {
     // final response = await http.get(url);
     // final googleMapJsonData = json.decode(response.body);
     //final address = googleMapJsonData['results'][0]['formatted_address'];
-    var address = "277 Bedford Avenue, Brooklyn, NY 11211, USA";
+    var address = "277 Bedford Avenue, Brooklyn, NY, USA";
 
     setState(() {
       _pickedLocation = PlaceLocation(
