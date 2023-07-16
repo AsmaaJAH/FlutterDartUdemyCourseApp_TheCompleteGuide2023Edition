@@ -1,4 +1,5 @@
 import 'package:course_app/section13_FavouritePlaces_App/models/place.dart';
+import 'package:course_app/section13_FavouritePlaces_App/screens/single_place_details.dart';
 import 'package:flutter/material.dart';
 
 class PlacesList extends StatelessWidget {
@@ -29,8 +30,17 @@ class PlacesList extends StatelessWidget {
           placesList[index].title,
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 color: Theme.of(context).colorScheme.onBackground,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
         ),
+      onTap: () {
+         Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => SinglePlaceDetailScreen(place: placesList[index]),
+            ),
+          );
+      },
       ),
     );
   }
