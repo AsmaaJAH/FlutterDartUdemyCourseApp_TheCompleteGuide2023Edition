@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserPlacesNotifier extends StateNotifier<List<PlaceBluePrint>> {
   UserPlacesNotifier() : super(const []);
-  void addPlace(String title, File image) {
-    final newPlace = PlaceBluePrint(title: title,image: image);
+  void addPlace(String title, File image, PlaceLocation location) {
+    final newPlace = PlaceBluePrint(title: title,image: image, location:location );
     state = [newPlace, ...state];
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:course_app/section13_FavouritePlaces_App/models/place.dart';
 import 'package:course_app/section13_FavouritePlaces_App/widgets/location_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,12 +17,17 @@ class AddPlacesScreen extends ConsumerStatefulWidget {
 class _AddPlacesScreenState extends ConsumerState<AddPlacesScreen> {
   final _titleController = TextEditingController();
   File? _userCameraImage;
+  PlaceLocation? _location;
   void _savePlace() {
     final enteredTitle = _titleController.text;
-    if (enteredTitle.isEmpty || _userCameraImage==null ) {
+    if (enteredTitle.isEmpty || _userCameraImage == null|| _location==null) {
       return;
     }
-    ref.read(userPlacesNotifierProvider.notifier).addPlace(enteredTitle,_userCameraImage!);
+    ref.read(userPlacesNotifierProvider.notifier).addPlace(
+          enteredTitle,
+          _userCameraImage!,
+          _location!,
+        );
     Navigator.of(context).pop();
   }
 
@@ -53,7 +59,6 @@ class _AddPlacesScreenState extends ConsumerState<AddPlacesScreen> {
                   labelStyle: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    
                   ),
                 ),
                 controller: _titleController,
