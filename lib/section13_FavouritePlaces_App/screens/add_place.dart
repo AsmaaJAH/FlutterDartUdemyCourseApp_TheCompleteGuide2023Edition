@@ -1,3 +1,4 @@
+import 'package:course_app/section13_FavouritePlaces_App/widgets/image_input.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:course_app/section13_FavouritePlaces_App/providers/user_places.dart';
@@ -58,6 +59,9 @@ class _AddPlacesScreenState extends ConsumerState<AddPlacesScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const SizedBox(height: 10),
+              //native camera image input
+              const ImageInput(),
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: _savePlace,
