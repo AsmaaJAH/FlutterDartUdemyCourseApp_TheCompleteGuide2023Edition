@@ -20,7 +20,7 @@ class _AddPlacesScreenState extends ConsumerState<AddPlacesScreen> {
     if (enteredTitle.isEmpty || _userCameraImage==null ) {
       return;
     }
-    ref.read(userPlacesNotifierProvider.notifier).addPlace(enteredTitle,_userCameraImage);
+    ref.read(userPlacesNotifierProvider.notifier).addPlace(enteredTitle,_userCameraImage!);
     Navigator.of(context).pop();
   }
 
