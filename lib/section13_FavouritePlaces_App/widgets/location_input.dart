@@ -32,10 +32,12 @@ class _LocationInputState extends State<LocationInput> {
   Future<void> _savePlace(double latitude, double longitude) async {
     //using google maps package to get the human readable address via inputing the above latitude and longitude in it
     final url = Uri.parse(
-        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyBHuV4xO8Slasa4CwNcUN1uobwDkdeFsP4');
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyDku-hz2XmahQ0cVjU6P2XabDSLR_f_jx0');
     final response = await http.get(url);
     final googleMapJsonData = json.decode(response.body);
+    //debugPrint(googleMapJsonData.toString()); //flutter (25787): {error_message: This API project is not authorized to use this API., results: [], status: REQUEST_DENIED}
     final address = googleMapJsonData['results'][0]['formatted_address'];
+    //final address = 'address, alexandria, Egypt';
 
     setState(() {
       _pickedLocation = PlaceLocation(

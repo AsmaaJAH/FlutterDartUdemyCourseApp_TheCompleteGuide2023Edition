@@ -32,8 +32,8 @@ class UserPlacesNotifier extends StateNotifier<List<PlaceBluePrint>> {
             title: row['title'] as String,
             image: File(row['image'] as String),
             location: PlaceLocation(
-              latitude: row['lat'] as double,
-              longitude: row['lng'] as double,
+              latitude: row['latitude'] as double,
+              longitude: row['longitude'] as double,
               address: row['address'] as String,
             ),
           ),

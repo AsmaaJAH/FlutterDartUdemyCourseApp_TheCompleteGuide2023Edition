@@ -40,7 +40,9 @@ class _MapScreenState extends State<MapScreen> {
           ]),
       body: GoogleMap(
           onTap:!widget.isSelecting? null: (position) {
-            _pickedLocation = position;
+           setState(() {
+                         _pickedLocation = position;
+           });
           },
           initialCameraPosition: CameraPosition(
             target: LatLng(
@@ -54,7 +56,7 @@ class _MapScreenState extends State<MapScreen> {
               : {
                   Marker(
                     markerId: const MarkerId("asmaa1"),
-                    position: LatLng(
+                    position: _pickedLocation ?? LatLng(
                       widget.location.latitude,
                       widget.location.longitude,
                     ),

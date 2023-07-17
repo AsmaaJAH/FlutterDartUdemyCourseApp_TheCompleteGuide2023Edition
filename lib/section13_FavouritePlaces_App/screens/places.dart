@@ -15,9 +15,9 @@ class _PlacesScreenState extends ConsumerState<PlacesScreen> {
   late Future<void> _placeFuture;
   @override
   void initState() {
+    super.initState();
     _placeFuture =
         ref.read(userPlacesNotifierProvider.notifier).loadPlacesViaDatabase();
-    super.initState();
   }
 
   @override
@@ -51,7 +51,7 @@ class _PlacesScreenState extends ConsumerState<PlacesScreen> {
           future: _placeFuture,
           builder: (context, snapshot) =>
               snapshot.connectionState == ConnectionState.waiting
-                  ? const Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator(),)
                   : PlacesList(
                       placesList: userPlaces,
                     ),
