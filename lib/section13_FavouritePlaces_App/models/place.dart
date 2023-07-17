@@ -13,8 +13,12 @@ class PlaceLocation {
 }
 
 class PlaceBluePrint {
-  PlaceBluePrint({required this.title, required this.image, required this.location})
-      : id = uniqueUuid.v4();
+  PlaceBluePrint({
+    required this.title,
+    required this.image,
+    required this.location,
+    String? id,
+  }) : id= id ?? uniqueUuid.v4();
   final String id;
   final String title;
   final File image;
