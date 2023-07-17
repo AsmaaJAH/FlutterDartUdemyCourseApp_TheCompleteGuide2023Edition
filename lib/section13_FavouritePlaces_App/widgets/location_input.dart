@@ -24,8 +24,7 @@ class _LocationInputState extends State<LocationInput> {
     }
     final lat = _pickedLocation!.latitude;
     final lng = _pickedLocation!.longitude;
-    //return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng=&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$lat,$lng&key=real-key';
-    return 'https://cdn.sanity.io/images/f4joeudg/production/7f846197ab0edd09d1793a203d4b9016a2c22fa4-400x250.png';
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng=&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$lat,$lng&key=AIzaSyDku-hz2XmahQ0cVjU6P2XabDSLR_f_jx0';
   }
 
   void _getCurrentLocation() async {
@@ -61,12 +60,11 @@ class _LocationInputState extends State<LocationInput> {
       return;
     }
     //using google maps package to get the human readable address via inputing the above latitude and longitude in it
-    // final url = Uri.parse(
-    //     'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyDLcwxUggpPZo8lxbH0TB4Crq5SJjtj4ag');
-    // final response = await http.get(url);
-    // final googleMapJsonData = json.decode(response.body);
-    //final address = googleMapJsonData['results'][0]['formatted_address'];
-    var address = "277 Bedford Avenue, Brooklyn, NY, USA";
+    final url = Uri.parse(
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyDku-hz2XmahQ0cVjU6P2XabDSLR_f_jx0');
+    final response = await http.get(url);
+    final googleMapJsonData = json.decode(response.body);
+    final address = googleMapJsonData['results'][0]['formatted_address'];
 
     setState(() {
       _pickedLocation = PlaceLocation(
