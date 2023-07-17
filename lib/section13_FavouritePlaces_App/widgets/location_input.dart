@@ -61,7 +61,7 @@ class _LocationInputState extends State<LocationInput> {
     }
     //using google maps package to get the human readable address via inputing the above latitude and longitude in it
     final url = Uri.parse(
-        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyDku-hz2XmahQ0cVjU6P2XabDSLR_f_jx0');
+        'https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyBHuV4xO8Slasa4CwNcUN1uobwDkdeFsP4');
     final response = await http.get(url);
     final googleMapJsonData = json.decode(response.body);
     final address = googleMapJsonData['results'][0]['formatted_address'];
