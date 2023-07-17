@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "808335310742",
+    "project_id": "asmaa-flutter-chat-app",
+    "storage_bucket": "asmaa-flutter-chat-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808335310742:android:94bd7ceeb8c076aa5427b7",
+        "android_client_info": {
+          "package_name": "com.example.course_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808335310742-ap63kac1oon32te6a16uavitgsbge5gr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyqD4pjnZ0JP9IRqR-He8j4uO6aYrBVPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808335310742-ap63kac1oon32te6a16uavitgsbge5gr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "808335310742-rqd1a41beef4oetfkejkjbve92ol42em.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.courseApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
