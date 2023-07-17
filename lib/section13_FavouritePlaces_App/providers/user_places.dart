@@ -2,14 +2,14 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart' as syspaths;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as path;
-import 'package:sqflite/sqflite.dart' as SQL;
+import 'package:sqflite/sqflite.dart' as sql;
 import 'package:sqflite/sqlite_api.dart';
 import 'package:course_app/section13_FavouritePlaces_App/models/place.dart';
 
 Future<Database> _getDatabase() async {
-  final dbPath = await SQL.getDatabasesPath();
+  final dbPath = await sql.getDatabasesPath();
   //open or create if not exist
-  final db = await SQL.openDatabase(
+  final db = await sql.openDatabase(
     path.join(dbPath, 'places.db'),
     onCreate: (db, version) {
       return db.execute(
