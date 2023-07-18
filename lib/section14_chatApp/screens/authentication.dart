@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:course_app/section14_chatApp/widgets/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -21,6 +21,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   var _isLogin = true;
   var _enteredEmail = '';
   var _enteredPassward = '';
+  var _enteredUserName = '';
   var _isAuthenticating = false;
 
   File? _selectedImage;
@@ -50,7 +51,15 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
 
         await storageRef.putFile(_selectedImage!);
         final imageURL = await storageRef.getDownloadURL();
-        debugPrint(imageURL);
+        //debugPrint(imageURL);
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredentials.user!.uid)
+            .set({
+          'username': _enteredUserName,
+          'email': _enteredEmail,
+          'imageURL': imageURL,
+        });
       }
     } on FirebaseAuthException catch (error) {
       ScaffoldMessenger.of(context).clearSnackBars();
@@ -98,6 +107,25 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                             _selectedImage = pickedImage;
                           },
                         ),
+                      if (!_isLogin)
+                        TextFormField(
+                          decoration:
+                              const InputDecoration(labelText: 'UserName'),
+                          enableSuggestions: false,
+                          autocorrect: false,
+                          textCapitalization: TextCapitalization.none,
+                          validator: (value) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.trim().length < 3) {
+                              return 'Please enter at least 3 characters.';
+                            }
+                            return null;
+                          },
+                          onSaved: (newUser) {
+                            _enteredUserName = newUser!;
+                          },
+                        ),
                       TextFormField(
                         decoration:
                             const InputDecoration(labelText: 'Email Address'),
@@ -108,7 +136,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                           if (value == null ||
                               value.trim().isEmpty ||
                               !value.contains('@') ||
-                              !value.contains('.com')) {
+                              !value.contains('.')) {
                             return 'Please enter a valid email address';
                           }
                           return null;
