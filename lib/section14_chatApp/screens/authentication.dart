@@ -21,6 +21,8 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   var _isLogin = true;
   var _enteredEmail = '';
   var _enteredPassward = '';
+  var _isAuthenticating = false;
+
   File? _selectedImage;
 
   void _submit() async {
@@ -30,6 +32,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
     }
     _form.currentState!.save();
     try {
+      setState(() {
+        _isAuthenticating = true;
+      });
       if (_isLogin) {
         final userCredentials = await _firebase.signInWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPassward);
@@ -37,9 +42,12 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         final userCredentials = await _firebase.createUserWithEmailAndPassword(
             email: _enteredEmail, password: _enteredPassward);
 
-        final storageRef = FirebaseStorage.instance.ref().child('user_image').child(
-            '${userCredentials.user!.email}.${userCredentials.user!.uid}.jpg');
-            
+        final storageRef = FirebaseStorage.instance
+            .ref()
+            .child('user_image')
+            .child(
+                '${userCredentials.user!.email}.${userCredentials.user!.uid}.jpg');
+
         await storageRef.putFile(_selectedImage!);
         final imageURL = await storageRef.getDownloadURL();
         debugPrint(imageURL);
@@ -51,6 +59,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
           content: Text(error.message ?? 'Authentication failed.'),
         ),
       );
+      setState(() {
+        _isAuthenticating = false;
+      });
     }
   }
 
@@ -80,9 +91,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                   padding: const EdgeInsets.all(16),
                   child: Form(
                     key: _form,
-                    child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                     children: [
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
                       if (!_isLogin)
                         UserImagePicker(
                           onPickImage: (pickedImage) {
@@ -124,24 +133,28 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                         },
                       ),
                       const SizedBox(height: 15),
-                      ElevatedButton(
-                        onPressed: _submit,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primaryContainer,
+                      if (_isAuthenticating) const CircularProgressIndicator(),
+                      if (!_isAuthenticating)
+                        ElevatedButton(
+                          onPressed: _submit,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.primaryContainer,
+                          ),
+                          child: Text(_isLogin ? 'Login' : 'Signup'),
                         ),
-                        child: Text(_isLogin ? 'Login' : 'Signup'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _isLogin = !_isLogin;
-                          });
-                        },
-                        child: Text(_isLogin
-                            ? 'Create an account'
-                            : 'I already have an account'),
-                      ),
+                      if (_isAuthenticating) const CircularProgressIndicator(),
+                      if (!_isAuthenticating)
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              _isLogin = !_isLogin;
+                            });
+                          },
+                          child: Text(_isLogin
+                              ? 'Create an account'
+                              : 'I already have an account'),
+                        ),
                     ]),
                   ),
                 ),
