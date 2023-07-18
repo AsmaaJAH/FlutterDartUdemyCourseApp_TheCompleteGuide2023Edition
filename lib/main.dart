@@ -1,11 +1,12 @@
-import 'package:course_app/section14_chatApp/screens/chat.dart';
-import 'package:course_app/section14_chatApp/screens/splash.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 import 'package:course_app/section14_chatApp/screens/authentication.dart';
+import 'package:course_app/section14_chatApp/screens/chat.dart';
+import 'package:course_app/section14_chatApp/screens/splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
