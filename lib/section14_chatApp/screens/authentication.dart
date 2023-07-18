@@ -172,6 +172,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                           ),
                           child: Text(_isLogin ? 'Login' : 'Signup'),
                         ),
+                       const  SizedBox(height: 15,),
                       if (_isAuthenticating) const CircularProgressIndicator(),
                       if (!_isAuthenticating)
                         TextButton(
