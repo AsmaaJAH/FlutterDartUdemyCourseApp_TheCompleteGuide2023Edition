@@ -8,6 +8,7 @@ import 'package:course_app/section14_chatApp/screens/authentication.dart';
 import 'package:course_app/section14_chatApp/screens/chat.dart';
 import 'package:course_app/section14_chatApp/screens/splash.dart';
 
+//finishing the course
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
