@@ -39,7 +39,9 @@ This is the shopping list app that is required from us as a task in section 11. 
 ![ldjhd](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/e35a76a1-4a74-47d0-9fbf-1ba16163dbf7)
 
 
-Favorite Places app: all the native app features are done. Camera picker, live location package using longitude and latitude, static Google maps for human readable address,  SQL database using sqflite package .. here are the output screenshots:
+Favorite Places app: 
+
+all the native app features are done. Camera picker, live location package using longitude and latitude, static Google maps for human readable address,  SQL database using sqflite package .. here are the output screenshots:
 
 
 ![Capture (6)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/d3b11588-e91b-4f1b-8e77-2ec53c02334c)
