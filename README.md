@@ -1,4 +1,4 @@
-# course_app
+![Capture (3)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/cdbd8fc3-0a18-4626-9d40-a58326524071)# course_app
 
 App Threads: 
 
@@ -6,59 +6,62 @@ https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/
 
 the first task app:
 
-![Capture](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/f366db65-a16a-403a-a25d-f4241a65597a)
-
+![Capture](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/9adc3124-f026-4084-9eaf-30a9f03f8acb)
 
 the second one: Quiz App: 
 
-![kh](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/2f2139ce-757a-4cf3-bf26-231c7bc13c6a)
-![Capture (1)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/04a02b71-80d9-4ac3-b914-d4200b85e3c8)
+![kh](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/643fc224-a5b9-4231-aab0-5536b0a720ba)
+![Capture (1)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/89acc0a8-2129-45ce-83c1-746abbfb8122)
+
 
 
 the Expense Tracker App: 
+![Capture (2)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/a1c06515-c09f-456d-a88b-936bb36abde4)
+![1](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/b7ef543b-4d15-4a41-99da-e3075f014eb4)
+![2](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/e0c02966-6066-434a-b5f7-394a827b38b8)
 
-![Capture (2)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/e0717a51-4424-4184-ba7b-e7588e9e5742)
-![1](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/5b758614-a556-4244-8540-0ebc8717ed5b)
-![2](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/7829c372-28bb-49db-ad16-2686ac535192)
 
 
 Sec 7: to-do app:
 
-![1 (1)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/987ccad7-1821-4233-8339-7ffc0fe7885f)
+![1 (1)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/b08be2b3-3405-48f0-901b-f531e6f0f69e)
 
 
 section 8: Meals App:
 
-![Capture (3)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/9043bf91-9edd-4a21-aa06-8c7e685a249f)
-![Capture (4)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/6e3b29a0-3cfe-45d1-a00a-47a5a0f24b3a)
-![0](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/f932036c-464f-4d3c-8ce1-a3000392a285)
-![Screenshot_1689165231](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/7b06a4a5-ef33-46b1-831f-95b536b3f1c0)
+![Uploadi![Capture (4)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/c7dc84f2-464e-4b9a-9d30-1d937d089d09)
+ng Capture (3).PNG…]()
+![0](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/3a37900a-8df6-4e1e-8433-410595c77e10)
+![Screenshot_1689165231](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/ea820113-883e-4729-baf5-7d209d7c3cba)
 
 
 This is the shopping list app that is required from us as a task in section 11. and I started section 12, by configuring and sending data from the app to Firebase real-time database:
 
-![Capture (5)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/29e856c7-a90a-4c28-9faf-5ef4d3240e7b)
-![ldjhd](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/e35a76a1-4a74-47d0-9fbf-1ba16163dbf7)
+![Capture (5)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/e2b0c8e2-0afe-400a-9df7-26b857c98df4)
+
+![ldjhd](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/9dec0db4-26c7-4176-8bc8-8b60016e138a)
 
 
 Favorite Places app: 
 
 all the native app features are done. Camera picker, live location package using longitude and latitude, static Google maps for human readable address,  SQL database using sqflite package .. here are the output screenshots:
 
+![Capture (6)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/a13a88fd-ccca-42f0-b150-b816d28aa881)
+![fgd](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/36f45111-640c-446d-a73a-ef3a63f5f38b)
+![kuedyd](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/e80fd947-6777-4327-b0b5-f7062f8a1244)
+![ljd](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/7795a653-3102-46a8-be4f-fc912a30e806)
+![lkkj](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/aa88b9ad-58c4-4327-abe9-56f5990f46f8)
+![lldkd](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/f9d0e4d5-a089-4e71-8763-e70d791b077f)
 
-![Capture (6)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/d3b11588-e91b-4f1b-8e77-2ec53c02334c)
-![fgd](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/14cb791b-8c08-42b5-8ea0-847b3c49d5e8)
-![kuedyd](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/2ddef470-3dec-4044-9beb-5f34ec0ea59e)
-![ljd](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/596ffa23-c8c4-423f-b7c1-a71b68e24844)
-![lkkj](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/94d2c256-8367-49e1-9545-ff0654fbe09e)
-![lldkd](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/1ee29587-0ce5-4009-a884-136e1b31ac48)
 
 
 The chat app:
 
 I also enabled the "individual notifications" and the "manually-channel notifications" only.. because the "automatically-channel notification" function wanna us to provide a payment method and upgrade the account to the Blaze (pay-as-you-go) plan.
 
-![Capture (7)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/d7de0629-7073-43d8-9674-820cb00fb8dd)
-![Capture (8)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/b67d6921-6186-42cd-ba5a-e99cd0c09480)
-![kjhgf](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/c45b1089-a09d-49ad-8d26-50056cef7fa9)
+![Capture (7)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/9d6058aa-c650-434f-ad60-4343ca9fd608)
+![Capture (8)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/f712b98a-b3f9-44cb-b3cd-3f2200f0f85c)
+![kjhgf](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/3f958b58-9952-4ad8-b0be-43bdd3e8e828)
+
+
 
