@@ -104,7 +104,7 @@ class _NewExpenseState extends State<NewExpense> {
       builder: (context, constraints) {
         final width = constraints.maxWidth;
         return SizedBox(
-          height: double.infinity,
+          //height: double.infinity,
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.fromLTRB(20, 20, 20, keybordSpace + 20),
