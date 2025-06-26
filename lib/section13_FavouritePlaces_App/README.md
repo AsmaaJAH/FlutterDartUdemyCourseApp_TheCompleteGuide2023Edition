@@ -1,13 +1,19 @@
 # Favorite Places app:
 
 
-This repo consists of the projects that I did after taking this paid Udemy course: https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/
+This repo consists of the projects that I did after taking this paid Udemy course:
+
+https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/
 
 
 
-About "Favorite Places" app: 
+### About "Favorite Places" app: 
 
-all the native app features are done. Camera picker, live location package using longitude and latitude, static Google maps for human readable address,  SQL database using sqflite package .. here are the output screenshots:
+all the native app features are done. Camera picker, live location package using longitude and latitude, static Google maps for human readable address,  SQL database using sqflite package ..This is a video for the app flows: 
+
+https://drive.google.com/file/d/1dDntUlaI6183fPUTzAHF75W6Fwkft0H2/view?usp=drive_link
+
+And here are the output screenshots:
 
 ![Capture (6)](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/a13a88fd-ccca-42f0-b150-b816d28aa881)
 ![fgd](https://github.com/AsmaaJAH/FlutterDartUdemyCourseApp_TheCompleteGuide2023Edition/assets/88660261/36f45111-640c-446d-a73a-ef3a63f5f38b)
