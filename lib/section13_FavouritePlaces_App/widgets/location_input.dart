@@ -51,11 +51,11 @@ class _LocationInputState extends State<LocationInput> {
   }
 
   void _getCurrentLocation() async {
-    Location location = Location();
+    Location location = Location();// from location package 
 
     bool serviceEnabled;
-    PermissionStatus permissionGranted;
-    LocationData locationData;
+    PermissionStatus permissionGranted;// from location package 
+    LocationData locationData;// from location package 
 
     serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled) {
@@ -86,7 +86,7 @@ class _LocationInputState extends State<LocationInput> {
   }
 
   void _selectLocationUsingMap() async {
-    final pickedLocation = await Navigator.of(context).push<LatLng>(
+    final pickedLocation = await Navigator.of(context).push<LatLng>(//from google maps
       MaterialPageRoute(
         builder: (ctx) => const MapScreen(),
       ),
